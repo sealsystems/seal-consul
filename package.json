@@ -1,6 +1,6 @@
 {
   "name": "seal-consul",
-  "version": "3.2.7",
+  "version": "3.2.8",
   "description": "seal-consul provides service discovery based on Consul.",
   "author": {
     "name": "SEAL Systems AG",
