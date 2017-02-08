@@ -1,0 +1,32 @@
+machine:
+  timezone: Europe/Berlin
+
+  environment:
+    CONSUL_VERSION: 0.7.2
+
+  services:
+    - docker
+
+  node:
+    version: 6.2.2
+
+dependencies:
+  pre:
+    # Copy TLS cert to /etc/tls/ for further use
+    - sudo cp -r tls /etc
+    # Start Consul
+    - >
+      docker run -d --name consul -v /etc/tls:/tls -p 8400:8400 -p 8500:8500 -p 127.0.0.1:53:8600/udp -e 'CONSUL_LOCAL_CONFIG={
+        "cert_file": "/tls/cert.pem",
+        "key_file": "/tls/key.pem",
+        "ports": {
+          "http": -1,
+          "https": 8500
+        },
+        "server": true
+      }' consul:${CONSUL_VERSION}
+
+test:
+  override:
+    - npm install -g roboter-cli
+    - npm run bot

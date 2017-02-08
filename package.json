@@ -1,0 +1,46 @@
+{
+  "name": "seal-consul",
+  "version": "3.2.7",
+  "description": "seal-consul provides service discovery based on Consul.",
+  "author": {
+    "name": "SEAL Systems AG",
+    "email": "opensource@sealsystems.de",
+    "url": "https://www.sealsystems.de"
+  },
+  "license": "MIT",
+  "scripts": {
+    "bot": "bot",
+    "release": "bot release && npm publish",
+    "release-minor": "bot release --type minor && npm publish",
+    "release-major": "bot release --type major && npm publish",
+    "test": "bot test-units",
+    "coverage": "istanbul cover _mocha -- --recursive --ui tdd ",
+    "report": "npm run coverage && if [[ $OSTYPE == darwin* ]]; then open=open; else open=xdg-open; fi && $open coverage/lcov-report/index.html"
+  },
+  "main": "lib/consul.js",
+  "dependencies": {
+    "app-root-path": "2.0.1",
+    "consul": "0.27.0",
+    "dnscache": "1.0.1",
+    "getenv": "0.7.0",
+    "lodash": "4.17.4",
+    "parse-duration": "0.1.1",
+    "retry": "0.10.1",
+    "seal-droddel": "1.0.1",
+    "seal-tlscert": "1.2.1"
+  },
+  "devDependencies": {
+    "assertthat": "0.8.3",
+    "docker-host": "3.1.0",
+    "eslint-config-seal": "0.0.9",
+    "nodeenv": "0.2.1",
+    "proxyquire": "1.7.11",
+    "roboter": "0.13.7",
+    "roboter-server": "0.13.7",
+    "uuidv4": "0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sealsystems/seal-consul.git"
+  }
+}

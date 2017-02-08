@@ -1,0 +1,42 @@
+version: "{build}"
+
+# Uncomment to debug via RDP
+# init:
+#   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+#
+# on_finish:
+#   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+environment:
+  NODE_VERSION: "6.2.2"
+  CONSUL_VERSION: 0.7.2
+
+install:
+  # Install Node.js
+  - ps: Install-Product node $env:NODE_VERSION x64
+  # Install Consul
+  - ps: >-
+      choco install -y consul -version $env:CONSUL_VERSION
+
+      @{
+        bind_addr="127.0.0.1"
+        bootstrap_expect=1
+        cert_file="C:\projects\$($env:APPVEYOR_PROJECT_NAME)\tls\cert.pem"
+        data_dir="C:\ProgramData\consul\data"
+        key_file="C:\projects\$($env:APPVEYOR_PROJECT_NAME)\tls\key.pem"
+        ports=@{
+          dns=53
+          http=-1
+          https=8500
+        }
+        server=$True
+      } | ConvertTo-Json | Out-File -Filepath C:\ProgramData\consul\config\config.json -Encoding ascii
+
+      nssm start consul
+
+build: off
+
+test_script:
+  - npm install
+  - npm install -g roboter-cli
+  - npm run bot
