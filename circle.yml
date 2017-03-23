@@ -2,7 +2,7 @@ machine:
   timezone: Europe/Berlin
 
   environment:
-    CONSUL_VERSION: 0.7.2
+    CONSUL_VERSION: 0.7.5
 
   services:
     - docker

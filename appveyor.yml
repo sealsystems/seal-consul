@@ -9,7 +9,7 @@ version: "{build}"
 
 environment:
   NODE_VERSION: "6.2.2"
-  CONSUL_VERSION: 0.7.2
+  CONSUL_VERSION: 0.7.5
 
 install:
   # Install Node.js
