@@ -1,5 +1,5 @@
 {
-  "name": "seal-consul",
+  "name": "@sealsystems/seal-consul",
   "version": "3.4.1",
   "description": "seal-consul provides service discovery based on Consul.",
   "author": {
