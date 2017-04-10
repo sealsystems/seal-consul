@@ -86,7 +86,7 @@ suite('connect', () => {
         return consul.options.address === host;
       };
 
-      assert.that(err).is.null();
+      assert.that(!err || err.message === 'Verification failed.').is.true();
       assert.that(checkHost()).is.true();
       done();
     });
@@ -99,7 +99,7 @@ suite('connect', () => {
       serviceTags: ['tag1', 'tag2'],
       serviceUrl: `bar://${host}:3000`
     }, (err) => {
-      assert.that(err).is.null();
+      assert.that(!err || err.message === 'Verification failed.').is.true();
       assert.that(consul.options.tags.length).is.equalTo(3);
       assert.that(consul.options.tags[0]).is.equalTo('tag1');
       assert.that(consul.options.tags[1]).is.equalTo('tag2');
@@ -115,7 +115,7 @@ suite('connect', () => {
       serviceTags: ['tag', ''],
       serviceUrl: `bar://${host}:3000`
     }, (err) => {
-      assert.that(err).is.null();
+      assert.that(!err || err.message === 'Verification failed.').is.true();
       assert.that(consul.options.tags.length).is.equalTo(2);
       assert.that(consul.options.tags[0]).is.equalTo('tag');
       assert.that(consul.options.tags[1]).is.equalTo(require('../package.json').version.replace(/\./g, '-'));
@@ -130,7 +130,7 @@ suite('connect', () => {
       serviceName: 'foo',
       serviceUrl: 'http://:3000'
     }, (err) => {
-      assert.that(err).is.null();
+      assert.that(!err || err.message === 'Verification failed.').is.true();
       assert.that(consul.options.address).is.undefined();
       assert.that(consul.options.port).is.equalTo(3000);
       done();

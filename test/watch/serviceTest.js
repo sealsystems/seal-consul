@@ -40,7 +40,7 @@ suite('watch/service', () => {
         serviceUrl: `http://${host}:3000`,
         status: 'pass'
       }, (errConnect) => {
-        assert.that(errConnect).is.null();
+        assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
 
         service({
           consulUrl: `http://${host}:8500`,
@@ -71,7 +71,7 @@ suite('watch/service', () => {
         serviceUrl: `http://${host}:3000`,
         status: 'pass'
       }, (errConnect) => {
-        assert.that(errConnect).is.null();
+        assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
 
         service({
           consulUrl: `http://${host}:8500`,
@@ -104,7 +104,7 @@ suite('watch/service', () => {
         serviceName,
         serviceUrl: `http://${host}:3000`
       }, (errConnect) => {
-        assert.that(errConnect).is.null();
+        assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
 
         service({
           consulUrl: `http://${host}:8500`,

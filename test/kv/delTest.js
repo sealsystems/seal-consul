@@ -14,8 +14,7 @@ const conectOptions = {
 
 suite('kv/del', () => {
   suiteSetup((done) => {
-    consul.connect(conectOptions, (errConnect) => {
-      assert.that(errConnect).is.null();
+    consul.connect(conectOptions, () => {
       done();
     });
   });
