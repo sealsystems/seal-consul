@@ -9,7 +9,7 @@ version: "{build}"
 
 environment:
   NODE_VERSION: 6.10.1
-  CONSUL_VERSION: 0.7.2
+  CONSUL_VERSION: 0.7.5
 
 install:
   # Install Node.js
@@ -17,6 +17,7 @@ install:
   # Install Consul
   - ps: >-
       choco install -y consul -version $env:CONSUL_VERSION
+      Stop-Service consul
 
       @{
         bind_addr="127.0.0.1"
@@ -32,7 +33,7 @@ install:
         server=$True
       } | ConvertTo-Json | Out-File -Filepath C:\ProgramData\consul\config\config.json -Encoding ascii
 
-      nssm start consul
+      Start-Service start consul
 
 build: off
 
