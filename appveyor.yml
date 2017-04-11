@@ -32,6 +32,8 @@ install:
         server=$True
       } | ConvertTo-Json | Out-File -Filepath C:\ProgramData\consul\config\config.json -Encoding ascii
 
+      nssm start consul
+
 build: off
 
 test_script:
