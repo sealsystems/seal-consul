@@ -17,6 +17,7 @@ install:
   # Install Consul
   - ps: >-
       choco install -y consul -version $env:CONSUL_VERSION
+
       Stop-Service consul
 
       @{
@@ -33,7 +34,7 @@ install:
         server=$True
       } | ConvertTo-Json | Out-File -Filepath C:\ProgramData\consul\config\config.json -Encoding ascii
 
-      Start-Service start consul
+      Start-Service consul
 
 build: off
 
