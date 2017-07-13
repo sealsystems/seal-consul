@@ -42,7 +42,7 @@ suite('watch/service', () => {
       }, (errConnect) => {
         assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
 
-        service({
+        consul.watchService({
           consulUrl: `http://${host}:8500`,
           serviceName
         }, (errService, nodes) => {
@@ -73,7 +73,7 @@ suite('watch/service', () => {
       }, (errConnect) => {
         assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
 
-        service({
+        consul.watchService({
           consulUrl: `http://${host}:8500`,
           serviceName
         }, (errService, nodes) => {
@@ -106,7 +106,7 @@ suite('watch/service', () => {
       }, (errConnect) => {
         assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
 
-        service({
+        consul.watchService({
           consulUrl: `http://${host}:8500`,
           serviceName
         }, (errService, nodes) => {
