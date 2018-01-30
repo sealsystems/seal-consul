@@ -1,7 +1,7 @@
 {
-  "name": "@sealsystems/seal-consul",
+  "name": "@sealsystems/consul",
   "version": "3.5.7",
-  "description": "seal-consul provides service discovery based on Consul.",
+  "description": "@sealsystems/consul provides service discovery based on Consul.",
   "author": {
     "name": "SEAL Systems AG",
     "email": "opensource@sealsystems.de",
@@ -32,17 +32,17 @@
     "seal-tlscert": "1.2.1"
   },
   "devDependencies": {
-    "assertthat": "0.10.3",
+    "@sealsystems/eslint-config-es": "1.0.0",
+    "assertthat": "0.11.0",
     "docker-host": "3.1.0",
-    "eslint-config-seal": "0.0.9",
     "nodeenv": "0.2.1",
     "proxyquire": "1.8.0",
-    "roboter": "0.15.3",
-    "roboter-server": "0.15.3",
+    "roboter": "0.15.4",
+    "roboter-server": "0.15.4",
     "uuidv4": "0.5.0"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sealsystems/seal-consul.git"
+    "url": "git://github.com/sealsystems/node-consul.git"
   }
 }

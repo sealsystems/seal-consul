@@ -1,20 +1,22 @@
-# seal-consul
+# @sealsystems/consul
 
 [![CircleCI](https://circleci.com/gh/sealsystems/seal-consul.svg?style=svg)](https://circleci.com/gh/sealsystems/seal-consul)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/3y40yyflrpw10hao?svg=true)](https://ci.appveyor.com/project/Plossys/seal-consul)
 
-seal-consul provides service discovery based on Consul.
+@sealsystems/consul provides service discovery based on Consul.
 
 ## Installation
 
-    $ npm install seal-consul
+```bash
+npm install @sealsystems/consul
+```
 
 ## Quick start
 
-First you need to add a reference to seal-consul within your application.
+First you need to add a reference to @sealsystems/consul within your application.
 
 ```javascript
-const consul = require('seal-consul');
+const consul = require('@sealsystems/consul');
 ```
 
 Then call `connect` to register your service with Consul.
