@@ -6,48 +6,38 @@ const proxyquire = require('proxyquire');
 
 let keystore;
 const getConsulOptions = proxyquire('../../lib/util/getConsulOptions', {
-  'seal-tlscert': {
-    get () {
+  '@sealsystems/tlscert': {
+    async get () {
       return keystore;
     }
   }
 });
 
-suite('getConsulOptions', () => {
+suite('util/getConsulOptions', () => {
   setup(() => {
     keystore = null;
   });
 
-  test('is a function', (done) => {
+  test('is a function', async () => {
     assert.that(getConsulOptions).is.ofType('function');
-    done();
   });
 
-  test('throws an error if options are missing', (done) => {
-    assert.that(() => {
-      getConsulOptions();
-    }).is.throwing('Options are missing.');
-    done();
+  test('throws an error if Consul url is missing', async () => {
+    await assert.that(async () => {
+      await getConsulOptions({});
+    }).is.throwingAsync('Consul url is missing.');
   });
 
-  test('throws an error if Consul url is missing', (done) => {
-    assert.that(() => {
-      getConsulOptions({});
-    }).is.throwing('Consul url is missing.');
-    done();
+  test('returns an error if protocol of Consul url is unknown', async () => {
+    await assert.that(async () => {
+      await getConsulOptions({ consulUrl: 'foo://localhost:8500' });
+    }).is.throwingAsync('Wrong protocol in consul url provided.');
   });
 
-  test('returns an error if protocol of Consul url is unknown', (done) => {
-    assert.that(() => {
-      getConsulOptions({ consulUrl: 'foo://localhost:8500' });
-    }).is.throwing('Wrong protocol in consul url provided.');
-    done();
-  });
-
-  test('sets token and TLS options.', (done) => {
+  test('sets token and TLS options.', async () => {
     keystore = {};
 
-    const options = getConsulOptions({
+    const options = await getConsulOptions({
       consulUrl: 'https://foo',
       token: 'foo'
     });
@@ -57,66 +47,67 @@ suite('getConsulOptions', () => {
         token: 'foo'
       },
       host: 'foo',
+      promisify: true,
       secure: true
     });
-    done();
   });
 
   suite('TLS parameter \'secure\'', () => {
-    test('is set if TLS_UNPROTECTED is \'none\'.', (done) => {
-      nodeenv('TLS_UNPROTECTED', 'none', (restore) => {
-        keystore = {
-          cert: 'cert',
-          key: 'key'
-        };
+    test('is set if TLS_UNPROTECTED is \'none\'.', async () => {
+      const restore = nodeenv('TLS_UNPROTECTED', 'none');
 
-        assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.true();
-        restore();
-        done();
-      });
+      keystore = {
+        cert: 'cert',
+        key: 'key'
+      };
+
+      const options = await getConsulOptions({ consulUrl: 'https://foo' });
+
+      assert.that(options.secure).is.true();
+      restore();
     });
 
-    test('is set if TLS_UNPROTECTED is \'loopback\'.', (done) => {
-      nodeenv('TLS_UNPROTECTED', 'loopback', (restore) => {
-        keystore = {
-          cert: 'cert',
-          key: 'key'
-        };
+    test('is set if TLS_UNPROTECTED is \'loopback\'.', async () => {
+      const restore = nodeenv('TLS_UNPROTECTED', 'loopback');
 
-        assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.true();
-        restore();
-        done();
-      });
+      keystore = {
+        cert: 'cert',
+        key: 'key'
+      };
+
+      const options = await getConsulOptions({ consulUrl: 'https://foo' });
+
+      assert.that(options.secure).is.true();
+      restore();
     });
 
-    test('is not set if TLS_UNPROTECTED is \'world\'.', (done) => {
-      nodeenv('TLS_UNPROTECTED', 'world', (restore) => {
-        keystore = {
-          cert: 'cert',
-          key: 'key'
-        };
+    test('is not set if TLS_UNPROTECTED is \'world\'.', async () => {
+      const restore = nodeenv('TLS_UNPROTECTED', 'world');
 
-        assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.undefined();
-        restore();
-        done();
-      });
+      keystore = {
+        cert: 'cert',
+        key: 'key'
+      };
+
+      const options = await getConsulOptions({ consulUrl: 'https://foo' });
+
+      assert.that(options.secure).is.undefined();
+      restore();
     });
   });
 
   suite('CA certificate', () => {
-    test('is added.', (done) => {
+    test('is added.', async () => {
       keystore = {
         ca: 'ca',
         cert: 'cert',
         key: 'key'
       };
 
-      const options = getConsulOptions({ consulUrl: 'https://foo' });
+      const options = await getConsulOptions({ consulUrl: 'https://foo' });
 
       assert.that(options.ca).is.equalTo(['ca']);
       assert.that(options.secure).is.true();
-
-      done();
     });
   });
 });

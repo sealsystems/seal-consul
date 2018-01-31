@@ -19,26 +19,27 @@
   },
   "main": "lib/consul.js",
   "dependencies": {
+    "@sealsystems/droddel": "2.0.0",
+    "@sealsystems/tlscert": "2.0.0",
     "app-root-path": "2.0.1",
-    "async": "2.5.0",
-    "consul": "0.29.0",
+    "async": "2.6.0",
+    "async-retry": "1.1.4",
+    "consul": "0.30.0",
     "dnscache": "1.0.1",
+    "eventemitter2": "5.0.1",
     "getenv": "0.7.0",
     "lodash": "4.17.4",
     "parse-duration": "0.1.1",
-    "retry": "0.10.1",
-    "seal-droddel": "1.0.1",
-    "seal-log": "1.2.0",
-    "seal-tlscert": "1.2.1"
+    "seal-log": "1.2.0"
   },
   "devDependencies": {
-    "@sealsystems/eslint-config-es": "1.0.0",
+    "@sealsystems/eslint-config-es": "1.1.1",
     "assertthat": "0.11.0",
     "docker-host": "3.1.0",
-    "nodeenv": "0.2.1",
+    "nodeenv": "0.3.1",
     "proxyquire": "1.8.0",
-    "roboter": "0.15.4",
-    "roboter-server": "0.15.4",
+    "roboter": "0.15.6",
+    "roboter-server": "0.15.6",
     "uuidv4": "0.5.0"
   },
   "repository": {
