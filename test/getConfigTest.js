@@ -2,17 +2,17 @@
 
 const assert = require('assertthat');
 
-const getConfig = require('../lib/getConfig');
+const getConfiguration = require('../lib/getConfiguration');
 
-suite('getConfig', () => {
+suite('getConfiguration', () => {
   test('is a function.', (done) => {
-    assert.that(getConfig).is.ofType('function');
+    assert.that(getConfiguration).is.ofType('function');
     done();
   });
 
   test('throws error if agent is not initialized', (done) => {
     assert.that(() => {
-      getConfig.call({});
+      getConfiguration.call({});
     }).is.throwing('Agent not initialized.');
     done();
   });
@@ -23,7 +23,7 @@ suite('getConfig', () => {
     };
 
     assert.that(() => {
-      getConfig.call({ agent });
+      getConfiguration.call({ agent });
     }).is.throwing('Missing callback.');
     done();
   });
@@ -35,7 +35,7 @@ suite('getConfig', () => {
       }
     };
 
-    getConfig.call({ agent }, (err) => {
+    getConfiguration.call({ agent }, (err) => {
       assert.that(err).is.not.falsy();
       assert.that(err.message).is.equalTo('foo');
       done();
@@ -55,7 +55,7 @@ suite('getConfig', () => {
       }
     };
 
-    getConfig.call({ agent }, (err, config) => {
+    getConfiguration.call({ agent }, (err, config) => {
       assert.that(err).is.null();
       assert.that(config.Datacenter).is.equalTo('dc1');
       done();
@@ -71,7 +71,7 @@ suite('getConfig', () => {
       }
     };
 
-    getConfig.call({ agent }, (err, config) => {
+    getConfiguration.call({ agent }, (err, config) => {
       assert.that(err).is.null();
       assert.that(config.Domain).is.equalTo('consul.');
       done();
