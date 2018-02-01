@@ -4,41 +4,30 @@ const assert = require('assertthat');
 
 const filterByStatus = require('../../lib/util/filterByStatus');
 
-suite('filterByStatus', () => {
-  test('is a function.', (done) => {
+suite('util/filterByStatus', () => {
+  test('is a function.', async () => {
     assert.that(filterByStatus).is.ofType('function');
-    done();
   });
 
-  test('throws an error if options are missing.', (done) => {
-    assert.that(() => {
-      filterByStatus();
-    }).is.throwing('Options are missing.');
-    done();
-  });
-
-  test('throws an error if status is missing.', (done) => {
+  test('throws an error if status is missing.', async () => {
     assert.that(() => {
       filterByStatus({});
     }).is.throwing('Status is missing.');
-    done();
   });
 
-  test('throws an error if nodes are missing.', (done) => {
+  test('throws an error if nodes are missing.', async () => {
     assert.that(() => {
       filterByStatus({ status: 'passing' });
     }).is.throwing('Nodes are missing.');
-    done();
   });
 
-  test('throws an error if checks are missing.', (done) => {
+  test('throws an error if checks are missing.', async () => {
     assert.that(() => {
       filterByStatus({ status: 'passing' }, []);
     }).is.throwing('Checks are missing.');
-    done();
   });
 
-  test('returns only node whose checks return the wanted status.', (done) => {
+  test('returns only node whose checks return the wanted status.', async () => {
     const nodes = [{
       Node: 'foo',
       Address: '1.2.3.4',
@@ -87,10 +76,9 @@ suite('filterByStatus', () => {
     const actual = filterByStatus({ status }, nodes, checks);
 
     assert.that(actual).is.equalTo([nodes[0]]);
-    done();
   });
 
-  test('filters for multiple statuses.', (done) => {
+  test('filters for multiple statuses.', async () => {
     const nodes = [{
       Node: 'foo',
       Address: '1.2.3.4',
@@ -158,10 +146,9 @@ suite('filterByStatus', () => {
     const actual = filterByStatus({ status }, nodes, checks);
 
     assert.that(actual).is.equalTo([nodes[0], nodes[1]]);
-    done();
   });
 
-  test('handles empty list of checks.', (done) => {
+  test('handles empty list of checks.', async () => {
     const nodes = [{
       Node: 'foo',
       Address: '1.2.3.4',
@@ -189,6 +176,5 @@ suite('filterByStatus', () => {
     const actual = filterByStatus({ status }, nodes, checks);
 
     assert.that(actual).is.equalTo([]);
-    done();
   });
 });

@@ -9,120 +9,137 @@ const consul = require('../../lib/consul');
 const service = require('../../lib/watch/service');
 
 suite('watch/service', () => {
-  test('is a function.', (done) => {
+  test('is a function.', async () => {
     assert.that(service).is.ofType('function');
-    done();
   });
 
-  test('throws an error if options are missing.', (done) => {
-    assert.that(() => {
-      service();
-    }).is.throwing('Options are missing.');
-    done();
-  });
-
-  test('throws an error if service name is missing.', (done) => {
-    assert.that(() => {
-      service({});
-    }).is.throwing('Service name is missing.');
-    done();
+  test('throws an error if service name is missing.', async () => {
+    await assert.that(async () => {
+      await service({});
+    }).is.throwingAsync('Service name is missing.');
   });
 
   suite('sends notification', () => {
-    test('about services that are already running at start.', function (done) {
-      const serviceName = uuid();
-      let iteration = 0;
-
+    test('about services that are already running at start.', async function () {
       this.timeout(10000);
-      consul.connect({
+
+      const serviceName = uuid();
+
+      await consul.connect({
         consulUrl: `http://${host}:8500`,
         serviceName,
         serviceUrl: `http://${host}:3000`,
         status: 'pass'
-      }, (errConnect) => {
-        assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
+      });
 
-        consul.watchService({
-          consulUrl: `http://${host}:8500`,
-          serviceName
-        }, (errService, nodes) => {
-          assert.that(errService).is.null();
+      const watch = consul.watchService({ consulUrl: `http://${host}:8500`, serviceName });
 
+      await new Promise((resolve) => {
+        let iteration = 0;
+
+        watch.on('change', (nodes) => {
           iteration++;
-          if (iteration === 1) {
-            assert.that(nodes.length).is.equalTo(1);
-            assert.that(nodes[0].host).is.ofType('string');
-            assert.that(nodes[0].node).is.ofType('string');
-            assert.that(nodes[0].port).is.equalTo(3000);
-            return done();
+
+          switch (iteration) {
+            case 1: {
+              assert.that(nodes.length).is.equalTo(1);
+              assert.that(nodes[0].host).is.ofType('string');
+              assert.that(nodes[0].node).is.ofType('string');
+              assert.that(nodes[0].port).is.equalTo(3000);
+              resolve();
+              break;
+            }
+            default: {
+              // Do nothing.
+            }
           }
         });
       });
     });
 
-    test('if an active service fails.', function (done) {
-      const serviceName = uuid();
-      let iteration = 0;
-
+    test('if an active service fails.', async function () {
       this.timeout(10000);
-      consul.connect({
+
+      const serviceName = uuid();
+
+      await consul.connect({
         consulUrl: `http://${host}:8500`,
         serviceName,
         serviceUrl: `http://${host}:3000`,
         status: 'pass'
-      }, (errConnect) => {
-        assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
+      });
 
-        consul.watchService({
-          consulUrl: `http://${host}:8500`,
-          serviceName
-        }, (errService, nodes) => {
-          assert.that(errService).is.null();
+      const watch = consul.watchService({ consulUrl: `http://${host}:8500`, serviceName });
 
-          iteration++;
-          if (iteration === 1) {
-            assert.that(nodes.length).is.equalTo(1);
-            assert.that(nodes[0].host).is.ofType('string');
-            assert.that(nodes[0].node).is.ofType('string');
-            assert.that(nodes[0].port).is.equalTo(3000);
-            consul.warn(() => {});
-          } else if (iteration === 2) {
-            assert.that(nodes.length).is.equalTo(0);
-            return done();
-          }
+      await new Promise((resolve) => {
+        let iteration = 0;
+
+        watch.on('change', (nodes) => {
+          (async () => {
+            iteration++;
+
+            switch (iteration) {
+              case 1: {
+                assert.that(nodes.length).is.equalTo(1);
+                assert.that(nodes[0].host).is.ofType('string');
+                assert.that(nodes[0].node).is.ofType('string');
+                assert.that(nodes[0].port).is.equalTo(3000);
+                await consul.warn(() => {});
+                break;
+              }
+              case 2: {
+                assert.that(nodes.length).is.equalTo(0);
+                resolve();
+                break;
+              }
+              default: {
+                // Do nothing.
+              }
+            }
+          })();
         });
       });
     });
 
-    test('if a broken service is up again.', function (done) {
-      const serviceName = uuid();
-      let iteration = 0;
-
+    test('if a broken service is up again.', async function () {
       this.timeout(10000);
-      consul.connect({
+
+      const serviceName = uuid();
+
+      await consul.connect({
         consulUrl: `http://${host}:8500`,
         serviceName,
         serviceUrl: `http://${host}:3000`
-      }, (errConnect) => {
-        assert.that(!errConnect || errConnect.message === 'Verification failed.').is.true();
+      });
 
-        consul.watchService({
-          consulUrl: `http://${host}:8500`,
-          serviceName
-        }, (errService, nodes) => {
-          assert.that(errService).is.null();
+      const watch = consul.watchService({ consulUrl: `http://${host}:8500`, serviceName });
 
-          iteration++;
-          if (iteration === 1) {
-            assert.that(nodes.length).is.equalTo(0);
-            consul.pass(() => {});
-          } else if (iteration === 2) {
-            assert.that(nodes.length).is.equalTo(1);
-            assert.that(nodes[0].host).is.ofType('string');
-            assert.that(nodes[0].node).is.ofType('string');
-            assert.that(nodes[0].port).is.equalTo(3000);
-            return done();
-          }
+      await new Promise((resolve) => {
+        let iteration = 0;
+
+        watch.on('change', (nodes) => {
+          (async () => {
+            iteration++;
+
+            switch (iteration) {
+              case 1: {
+                assert.that(nodes.length).is.equalTo(0);
+                await consul.pass(() => {});
+                break;
+              }
+              case 2: {
+                assert.that(nodes.length).is.equalTo(1);
+                assert.that(nodes[0].host).is.ofType('string');
+                assert.that(nodes[0].node).is.ofType('string');
+                assert.that(nodes[0].port).is.equalTo(3000);
+                resolve();
+                break;
+              }
+              default: {
+                // Do nothing.
+              }
+            }
+          })();
         });
       });
     });

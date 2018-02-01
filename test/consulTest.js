@@ -7,15 +7,18 @@ const consul = require('../lib/consul');
 
 let resolveResults;
 let resolveResultIndex;
+
 const mockedConsul = proxyquire('../lib/consul', {
   dns: {
     resolve (hostname, callback) {
       if (resolveResults[resolveResultIndex]) {
         callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
+
         return resolveResultIndex++;
       }
       callback(null, []);
     },
+
     lookup (hostname, callback) {
       if (!hostname) {
         return callback(null, null);
@@ -27,7 +30,7 @@ const mockedConsul = proxyquire('../lib/consul', {
 });
 
 suite('consul', () => {
-  setup((done) => {
+  setup(async () => {
     mockedConsul.retryOptions = {
       retries: 5,
       minTimeout: 0.1 * 1000,
@@ -38,77 +41,45 @@ suite('consul', () => {
 
     resolveResults = [];
     resolveResultIndex = 0;
-    done();
   });
 
-  test('is an object.', (done) => {
+  test('is an object.', async () => {
     assert.that(consul).is.ofType('object');
-    done();
   });
 
   suite('pass', () => {
-    test('is a function.', (done) => {
+    test('is a function.', async () => {
       assert.that(consul.pass).is.ofType('function');
-      done();
     });
 
-    test('throws an error if callback is missing.', (done) => {
-      assert.that(() => {
-        consul.pass();
-      }).is.throwing('Callback is missing.');
-      done();
-    });
+    test('sets status to "pass".', async () => {
+      await consul.pass();
 
-    test('sets status to "pass".', (done) => {
-      consul.pass((err) => {
-        assert.that(err).is.falsy();
-        assert.that(consul.status).is.equalTo('pass');
-        done();
-      });
+      assert.that(consul.status).is.equalTo('pass');
     });
   });
 
   suite('warn', () => {
-    test('is a function.', (done) => {
+    test('is a function.', async () => {
       assert.that(consul.warn).is.ofType('function');
-      done();
     });
 
-    test('throws an error if callback is missing.', (done) => {
-      assert.that(() => {
-        consul.warn();
-      }).is.throwing('Callback is missing.');
-      done();
-    });
+    test('sets status to "warn".', async () => {
+      await consul.warn();
 
-    test('sets status to "warn".', (done) => {
-      consul.warn((err) => {
-        assert.that(err).is.falsy();
-        assert.that(consul.status).is.equalTo('warn');
-        done();
-      });
+      assert.that(consul.status).is.equalTo('warn');
     });
   });
 
   suite('fail', () => {
-    test('is a function.', (done) => {
+    test('is a function.', async () => {
       assert.that(consul.fail).is.ofType('function');
-      done();
     });
 
-    test('throws an error if callback is missing.', (done) => {
-      assert.that(() => {
-        consul.fail();
-      }).is.throwing('Callback is missing.');
-      done();
-    });
+    test('sets status to "fail".', async () => {
+      await consul.fail();
 
-    test('sets status to "fail".', (done) => {
-      consul.fail((err) => {
-        assert.that(err).is.falsy();
-        assert.that(consul.status).is.equalTo('fail');
-        done();
-      });
+      assert.that(consul.status).is.equalTo('fail');
     });
   });
 });

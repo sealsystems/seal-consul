@@ -8,7 +8,7 @@ machine:
     - docker
 
   node:
-    version: 6.11.2
+    version: 8.9.4
 
 dependencies:
   pre:

@@ -7,6 +7,7 @@ let consulOptions;
 const initialize = proxyquire('../lib/initialize', {
   consul (options) {
     consulOptions = options;
+
     return {};
   }
 });
@@ -16,38 +17,29 @@ suite('initialize', () => {
     consulOptions = null;
   });
 
-  test('is a function.', (done) => {
+  test('is a function.', async () => {
     assert.that(initialize).is.ofType('function');
-    done();
   });
 
-  test('throws an error if options are missing.', (done) => {
-    assert.that(() => {
-      initialize();
-    }).is.throwing('Options are missing.');
-    done();
+  test('throws an error if Consul\'s url is missing.', async () => {
+    await assert.that(async () => {
+      await initialize({});
+    }).is.throwingAsync('Consul url is missing.');
   });
 
-  test('throws an error if Consul\'s url is missing.', (done) => {
-    assert.that(() => {
-      initialize({});
-    }).is.throwing('Consul url is missing.');
-    done();
-  });
+  test('calls consul with the given options.', async () => {
+    const context = {};
 
-  test('calls consul with the given options.', (done) => {
-    const thisContext = {
-    };
+    await initialize.call(context, { consulUrl: 'http://foo:1234' });
 
-    initialize.call(thisContext, { consulUrl: 'http://foo:1234' });
     assert.that(consulOptions).is.equalTo({
       defaults: {
         token: ''
       },
       host: 'foo',
+      promisify: true,
       port: 1234,
       secure: true
     });
-    done();
   });
 });

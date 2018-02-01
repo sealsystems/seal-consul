@@ -6,79 +6,52 @@ const consul = require('../../lib/consul');
 
 const host = require('docker-host')().host;
 
-const conectOptions = {
+const connectOptions = {
   consulUrl: `http://${host}:8500`,
   serviceName: 'foo',
   serviceUrl: 'http://localhost:19876'
 };
 
 suite('kv/del', () => {
-  suiteSetup((done) => {
-    consul.connect(conectOptions, () => {
-      done();
-    });
+  suiteSetup(async () => await consul.connect(connectOptions));
+
+  suiteTeardown(async () => {
+    try {
+      await consul.delKvs({
+        key: 'test',
+        recurse: true
+      });
+    } finally {
+      await consul.agent.service.deregister(consul.options);
+    }
   });
 
-  suiteTeardown((done) => {
-    consul.delKvs({
-      key: 'test',
-      recurse: true
-    }, (errDel) => {
-      assert.that(errDel).is.falsy();
-      consul.agent.service.deregister(consul.options, done);
-    });
-  });
-
-  test('is a function.', (done) => {
+  test('is a function.', async () => {
     assert.that(consul.delKvs).is.ofType('function');
-    done();
   });
 
-  test('throws error if options are missing', (done) => {
-    assert.that(() => {
-      consul.delKvs();
-    }).is.throwing('Options are missing.');
-    done();
+  test('throws error if key is missing', async () => {
+    await assert.that(async () => {
+      await consul.delKvs({});
+    }).is.throwingAsync('Key is missing.');
   });
 
-  test('throws error if options.key is missing', (done) => {
-    assert.that(() => {
-      consul.delKvs({});
-    }).is.throwing('Options.key is missing.');
-    done();
-  });
-
-  test('deletes kv value', (done) => {
+  test('deletes kv value', async () => {
     const key = 'test/kv/kvdelTest';
     const value = 'kvdelTestvalue';
 
-    consul.setKv({
-      key,
-      value
-    }, (errSet, result) => {
-      assert.that(errSet).is.falsy();
-      assert.that(result).is.true();
+    const result = await consul.setKv({ key, value });
 
-      consul.getKvs({
-        key
-      }, (errGet1, getResult1) => {
-        assert.that(errGet1).is.null();
-        assert.that(getResult1.Value).is.equalTo(value);
+    assert.that(result).is.true();
 
-        consul.delKvs({
-          key
-        }, (errDel) => {
-          assert.that(errDel).is.null();
+    const getResult1 = await consul.getKvs({ key });
 
-          consul.getKvs({
-            key
-          }, (errGet2, getResult2) => {
-            assert.that(errGet2).is.null();
-            assert.that(getResult2).is.undefined();
-            done();
-          });
-        });
-      });
-    });
+    assert.that(getResult1.Value).is.equalTo(value);
+
+    await consul.delKvs({ key });
+
+    const getResult2 = await consul.getKvs({ key });
+
+    assert.that(getResult2).is.undefined();
   });
 });

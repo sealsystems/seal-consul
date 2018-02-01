@@ -15,6 +15,7 @@ const mockedResolveService = proxyquire('../lib/resolveService', {
       resolveSrv (serviceName, callback) {
         if (resolveResults[resolveResultIndex]) {
           callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
+
           return resolveResultIndex++;
         }
         callback(null, []);
@@ -27,7 +28,7 @@ suite('resolveService', () => {
   const serviceName = uuid();
   const servicePort = 3000;
 
-  setup((done) => {
+  setup(async () => {
     consul.retryOptions = {
       retries: 5,
       minTimeout: 0.1 * 1000,
@@ -38,29 +39,19 @@ suite('resolveService', () => {
 
     resolveResults = [];
     resolveResultIndex = 0;
-    done();
   });
 
-  test('is a function.', (done) => {
+  test('is a function.', async () => {
     assert.that(resolveService).is.ofType('function');
-    done();
   });
 
-  test('throws an error if service name is missing.', (done) => {
-    assert.that(() => {
-      resolveService();
-    }).is.throwing('Service name is missing.');
-    done();
+  test('throws an error if service name is missing.', async () => {
+    await assert.that(async () => {
+      await resolveService();
+    }).is.throwingAsync('Service name is missing.');
   });
 
-  test('throws an error if callback is missing.', (done) => {
-    assert.that(() => {
-      resolveService('foo');
-    }).is.throwing('Callback is missing.');
-    done();
-  });
-
-  test('returns list of hosts', (done) => {
+  test('returns list of hosts', async () => {
     resolveResults = [
       {
         err: null,
@@ -70,25 +61,22 @@ suite('resolveService', () => {
         }]
       }
     ];
-    mockedResolveService.call(consul, serviceName, (errResolve, addresses) => {
-      assert.that(errResolve).is.null();
-      assert.that(addresses).is.ofType('array');
-      assert.that(addresses[0].name).is.equalTo('node1.node.dc1.consul');
-      assert.that(addresses[0].port).is.equalTo(servicePort);
-      done();
-    });
+
+    const addresses = await mockedResolveService.call(consul, serviceName);
+
+    assert.that(addresses).is.ofType('array');
+    assert.that(addresses[0].name).is.equalTo('node1.node.dc1.consul');
+    assert.that(addresses[0].port).is.equalTo(servicePort);
   });
 
-  test('returns empty array if service is not available', (done) => {
-    mockedResolveService.call(consul, 'hugo', (err, addresses) => {
-      assert.that(err).is.null();
-      assert.that(addresses).is.ofType('array');
-      assert.that(addresses.length).is.equalTo(0);
-      done();
-    });
+  test('returns empty array if service is not available', async () => {
+    const addresses = await mockedResolveService.call(consul, 'hugo');
+
+    assert.that(addresses).is.ofType('array');
+    assert.that(addresses.length).is.equalTo(0);
   });
 
-  test('retries after failure', (done) => {
+  test('retries after failure', async () => {
     resolveResults = [
       {
         err: new Error('resolve error')
@@ -98,14 +86,13 @@ suite('resolveService', () => {
         result: [{ address: 'localhost', port: 4712 }]
       }
     ];
-    mockedResolveService.call(consul, 'hugo', (err, addresses) => {
-      assert.that(err).is.null();
-      assert.that(addresses).is.equalTo(resolveResults[1].result);
-      done();
-    });
+
+    const addresses = await mockedResolveService.call(consul, 'hugo');
+
+    assert.that(addresses).is.equalTo(resolveResults[1].result);
   });
 
-  test('does not retry in case of ENODATA response', (done) => {
+  test('does not retry in case of ENODATA response', async () => {
     const errNoData = new Error('Service not found');
 
     errNoData.code = 'ENODATA';
@@ -114,13 +101,13 @@ suite('resolveService', () => {
         err: errNoData
       }
     ];
-    mockedResolveService.call(consul, 'hugo', (err) => {
-      assert.that(err).is.equalTo(errNoData);
-      done();
-    });
+
+    await assert.that(async () => {
+      await mockedResolveService.call(consul, 'hugo');
+    }).is.throwingAsync((e) => e === errNoData);
   });
 
-  test('gives up after 5 retries', (done) => {
+  test('gives up after 5 retries', async () => {
     resolveResults = [
       {
         err: new Error('resolve error 1')
@@ -141,10 +128,9 @@ suite('resolveService', () => {
         err: new Error('resolve error 6')
       }
     ];
-    mockedResolveService.call(consul, 'hugo', (err) => {
-      assert.that(err).is.not.null();
-      assert.that(err).is.equalTo(resolveResults[5].err);
-      done();
-    });
+
+    await assert.that(async () => {
+      await mockedResolveService.call(consul, 'hugo');
+    }).is.throwingAsync((e) => e === resolveResults[5].err);
   });
 });

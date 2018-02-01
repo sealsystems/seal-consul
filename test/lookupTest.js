@@ -14,6 +14,7 @@ const mockedLookup = proxyquire('../lib/lookup', {
       resolve (hostname, callback) {
         if (resolveResults[resolveResultIndex]) {
           callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
+
           return resolveResultIndex++;
         }
         callback(null, []);
@@ -23,7 +24,7 @@ const mockedLookup = proxyquire('../lib/lookup', {
 });
 
 suite('lookup', () => {
-  setup((done) => {
+  setup(async () => {
     consul.retryOptions = {
       retries: 5,
       minTimeout: 0.1 * 1000,
@@ -34,51 +35,37 @@ suite('lookup', () => {
 
     resolveResults = [];
     resolveResultIndex = 0;
-    done();
   });
 
-  test('is a function.', (done) => {
+  test('is a function.', async () => {
     assert.that(lookup).is.ofType('function');
-    done();
   });
 
-  test('throws an error if hostname is missing.', (done) => {
-    assert.that(() => {
-      lookup();
-    }).is.throwing('Hostname is missing.');
-    done();
+  test('throws an error if hostname is missing.', async () => {
+    await assert.that(async () => {
+      await lookup();
+    }).is.throwingAsync('Hostname is missing.');
   });
 
-  test('throws an error if callback is missing.', (done) => {
-    assert.that(() => {
-      lookup('foo');
-    }).is.throwing('Callback is missing.');
-    done();
-  });
-
-  test('returns ip address of host', (done) => {
+  test('returns ip address of host', async () => {
     resolveResults = [
       {
         err: null,
         result: ['127.0.0.1']
       }
     ];
-    mockedLookup.call(consul, 'hugo.local', (err, ip) => {
-      assert.that(err).is.null();
-      assert.that(ip).is.equalTo('127.0.0.1');
-      done();
-    });
+    const ip = await mockedLookup.call(consul, 'hugo.local');
+
+    assert.that(ip).is.equalTo('127.0.0.1');
   });
 
-  test('returns error if service is not available', (done) => {
-    mockedLookup.call(consul, 'hugo', (err) => {
-      assert.that(err).is.not.null();
-      assert.that(err.message).is.equalTo('No addresses found');
-      done();
-    });
+  test('returns error if service is not available', async () => {
+    await assert.that(async () => {
+      await mockedLookup.call(consul, 'hugo');
+    }).is.throwingAsync('No addresses found');
   });
 
-  test('retries after failure', (done) => {
+  test('retries after failure', async () => {
     resolveResults = [
       {
         err: new Error('resolve error')
@@ -88,14 +75,13 @@ suite('lookup', () => {
         result: ['127.0.0.1']
       }
     ];
-    mockedLookup.call(consul, 'hugo', (err, ip) => {
-      assert.that(err).is.null();
-      assert.that(ip).is.equalTo('127.0.0.1');
-      done();
-    });
+
+    const ip = await mockedLookup.call(consul, 'hugo');
+
+    assert.that(ip).is.equalTo('127.0.0.1');
   });
 
-  test('gives up after 5 retries', function (done) {
+  test('gives up after 5 retries', async function () {
     this.timeout(5 * 1000);
     resolveResults = [
       {
@@ -117,10 +103,9 @@ suite('lookup', () => {
         err: new Error('resolve error 6')
       }
     ];
-    mockedLookup.call(consul, 'hugo', (err) => {
-      assert.that(err).is.not.null();
-      assert.that(err).is.equalTo(resolveResults[5].err);
-      done();
-    });
+
+    await assert.that(async () => {
+      await mockedLookup.call(consul, 'hugo');
+    }).is.throwingAsync((e) => e === resolveResults[5].err);
   });
 });
