@@ -102,11 +102,9 @@ suite('resolveService', () => {
       }
     ];
 
-    try {
+    await assert.that(async () => {
       await mockedResolveService.call(consul, 'hugo');
-    } catch (e) {
-      assert.that(e).is.equalTo(errNoData);
-    }
+    }).is.throwingAsync((e) => e === errNoData);
   });
 
   test('gives up after 5 retries', async () => {
@@ -131,10 +129,8 @@ suite('resolveService', () => {
       }
     ];
 
-    try {
-      mockedResolveService.call(consul, 'hugo');
-    } catch (e) {
-      assert.that(e).is.equalTo(resolveResults[5].err);
-    }
+    await assert.that(async () => {
+      await mockedResolveService.call(consul, 'hugo');
+    }).is.throwingAsync((e) => e === resolveResults[5].err);
   });
 });
