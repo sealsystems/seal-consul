@@ -22,17 +22,14 @@ const consul = require('@sealsystems/consul');
 Then call `connect` to register your service with Consul.
 
 ```javascript
-consul.connect({
+await consul.connect({
   id: 'my-service-id',
   name: 'my-service-name',
   serviceUrl: 'http://localhost:3000', // URL of my service
   consulUrl: 'http://localhost:8500' // URL of a Consul server
-}, (err) => {
-  if (err) {
-    throw err;
-  }
-  // Your service is now registered
 });
+
+// Your service is now registered
 ```
 
 You may omit the hostname of your service in `serviceUrl` (e.g. by setting it to `http://:3000`). In this case, your service is assumed to run on the same host as the Consul agent.
@@ -42,9 +39,7 @@ For the service, a new health check with a TTL of 10 seconds will be created. A 
 By default, the status of a service is `warn`. Consul also recognizes the states `pass`and `fail`. Call the appropriate function, to change the state of your service. To set it to e.g. `pass`, use:
 
 ```javascript
-consul.pass((err) => {
-  // Check the result of your status change here...
-});
+await consul.pass();
 ```
 
 To get all nodes providing a specific service, call `getNodes`. It uses the same interface as [node-consul's `consul.catalog.service.nodes` function](https://github.com/silas/node-consul#catalog-service-nodes).
@@ -54,25 +49,27 @@ To get all nodes providing a specific service, call `getNodes`. It uses the same
 Use the `watch` function to receive notifications when the group of nodes that provide a service has been changed:
 
 ```javascript
-consul.watch({
+const watch = consul.watch({
   serviceName: 'my-service-name', // Name of the service to watch
   consulUrl: 'http://localhost:8500' // URL of a Consul server
-}, (err, nodes) => {
-  if (err) {
-    throw err;
-  }
-
-  // The 'nodes' array contains data about all nodes that provide the watched service
 });
+
+watch.on('change', (nodes) => {
+  // The 'nodes' array contains data about all nodes that provide the watched service  
+});
+
+watch.on('error', (err) => {
+  // ...
+})
 ```
 
-The callback is triggered as soon as a new node provides the service or a node is no longer available. Only nodes with passing health checks are regarded as available. At the start of the watch, the callback is also immediately triggered with an array of all currently active nodes.
+The `change` event is raised whenever a new node provides the service or a node is no longer available. Only nodes with passing health checks are regarded as available. At the start of the watch, the event is also immediately raised with an array of all currently active nodes.
 
 A node object contains the following properties:
+
 - `host`: The address of the node
 - `node`: Consul's node name
 - `port`: The port used by the service
-
 
 ## Custom Consul domain
 
