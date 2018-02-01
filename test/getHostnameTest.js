@@ -5,58 +5,53 @@ const assert = require('assertthat');
 const getHostname = require('../lib/getHostname');
 
 suite('getHostname', () => {
-  test('is a function.', (done) => {
+  test('is a function.', async () => {
     assert.that(getHostname).is.ofType('function');
-    done();
   });
 
-  test('returns an error if querying Consul failed.', (done) => {
+  test('returns an error if querying Consul failed.', async () => {
     const agent = {
-      self (callback) {
-        callback(new Error('foo'));
+      async self () {
+        throw new Error('foo');
       }
     };
 
-    getHostname.call({ agent }, (err) => {
-      assert.that(err).is.not.falsy();
-      assert.that(err.message).is.equalTo('foo');
-      done();
-    });
+    await assert.that(async () => {
+      await getHostname.call({ agent });
+    }).is.throwingAsync('foo');
   });
 
-  test('returns the hostname provided by Consul.', (done) => {
+  test('returns the hostname provided by Consul.', async () => {
     const agent = {
-      self (callback) {
-        callback(null, {
+      async self () {
+        return {
           Config: {
             NodeName: 'foo',
             Datacenter: 'bar',
             Domain: 'baz.'
           }
-        });
+        };
       }
     };
 
-    getHostname.call({ agent }, (err, hostname) => {
-      assert.that(err).is.null();
-      assert.that(hostname).is.equalTo('foo.node.bar.baz');
-      done();
-    });
+    const hostname = await getHostname.call({ agent });
+
+    assert.that(hostname).is.equalTo('foo.node.bar.baz');
   });
 
   // Please note: Depends on test above!
-  test('returns cached hostname.', (done) => {
+  test('returns cached hostname.', async () => {
+    let wasCalled = false;
+
     const agent = {
-      self () {
-        // Function should not be called
-        assert.that(false).is.eqalTo(true);
+      async self () {
+        wasCalled = true;
       }
     };
 
-    getHostname.call({ agent }, (err, hostname) => {
-      assert.that(err).is.null();
-      assert.that(hostname).is.equalTo('foo.node.bar.baz');
-      done();
-    });
+    const hostname = await getHostname.call({ agent });
+
+    assert.that(wasCalled).is.false();
+    assert.that(hostname).is.equalTo('foo.node.bar.baz');
   });
 });

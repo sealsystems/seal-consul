@@ -29,7 +29,7 @@ const mockedConsul = proxyquire('../lib/consul', {
   }
 });
 
-suite('consul', () => {
+suite.skip('consul', () => {
   setup(async () => {
     mockedConsul.retryOptions = {
       retries: 5,

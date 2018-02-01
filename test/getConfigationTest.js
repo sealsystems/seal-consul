@@ -5,76 +5,59 @@ const assert = require('assertthat');
 const getConfiguration = require('../lib/getConfiguration');
 
 suite('getConfiguration', () => {
-  test('is a function.', (done) => {
+  test('is a function.', async () => {
     assert.that(getConfiguration).is.ofType('function');
-    done();
   });
 
-  test('throws error if agent is not initialized', (done) => {
-    assert.that(() => {
-      getConfiguration.call({});
-    }).is.throwing('Agent not initialized.');
-    done();
+  test('throws error if agent is not initialized', async () => {
+    await assert.that(async () => {
+      await getConfiguration.call({});
+    }).is.throwingAsync('Agent not initialized.');
   });
 
-  test('throws error if callback is missing', (done) => {
+  test('returns an error if querying Consul failed.', async () => {
     const agent = {
-      self () {}
-    };
-
-    assert.that(() => {
-      getConfiguration.call({ agent });
-    }).is.throwing('Missing callback.');
-    done();
-  });
-
-  test('returns an error if querying Consul failed.', (done) => {
-    const agent = {
-      self (callback) {
-        callback(new Error('foo'));
+      async self () {
+        throw new Error('foo');
       }
     };
 
-    getConfiguration.call({ agent }, (err) => {
-      assert.that(err).is.not.falsy();
-      assert.that(err.message).is.equalTo('foo');
-      done();
-    });
+    await assert.that(async () => {
+      await getConfiguration.call({ agent });
+    }).is.throwingAsync('foo');
   });
 
-  test('returns the config provided by Consul.', (done) => {
+  test('returns the config provided by Consul.', async () => {
     const agent = {
-      self (callback) {
-        callback(null, {
+      async self () {
+        return {
           Config: {
             Datacenter: 'dc1',
             Domain: 'consul.',
             NodeName: 'server1'
           }
-        });
+        };
       }
     };
 
-    getConfiguration.call({ agent }, (err, config) => {
-      assert.that(err).is.null();
-      assert.that(config.Datacenter).is.equalTo('dc1');
-      done();
-    });
+    const configuration = await getConfiguration.call({ agent });
+
+    assert.that(configuration.Datacenter).is.equalTo('dc1');
   });
 
   // Please note: Depends on test above!
-  test('returns the config from cache.', (done) => {
+  test('returns the config from cache.', async () => {
+    let wasCalled = false;
+
     const agent = {
-      self () {
-        // Function should not be called
-        assert.that(false).is.equalTo(true);
+      async self () {
+        wasCalled = true;
       }
     };
 
-    getConfiguration.call({ agent }, (err, config) => {
-      assert.that(err).is.null();
-      assert.that(config.Domain).is.equalTo('consul.');
-      done();
-    });
+    const configuration = await getConfiguration.call({ agent });
+
+    assert.that(wasCalled).is.false();
+    assert.that(configuration.Domain).is.equalTo('consul.');
   });
 });
