@@ -27,19 +27,23 @@
     "consul": "0.30.0",
     "dnscache": "1.0.1",
     "eventemitter2": "5.0.1",
-    "getenv": "0.7.0",
     "lodash": "4.17.4",
     "parse-duration": "0.1.1",
+    "r2": "2.0.0",
     "seal-log": "1.2.0"
   },
   "devDependencies": {
     "@sealsystems/eslint-config-es": "1.1.1",
     "assertthat": "0.11.0",
+    "common-tags": "1.7.2",
     "docker-host": "3.1.0",
+    "formats": "0.5.5",
     "nodeenv": "0.3.1",
+    "processenv": "0.1.1",
     "proxyquire": "1.8.0",
     "roboter": "0.15.6",
     "roboter-server": "0.15.6",
+    "shelljs": "0.8.1",
     "uuidv4": "0.5.0"
   },
   "repository": {
