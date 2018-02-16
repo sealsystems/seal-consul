@@ -22,25 +22,23 @@
     "@sealsystems/droddel": "2.0.0",
     "@sealsystems/tlscert": "2.0.0",
     "app-root-path": "2.0.1",
-    "async": "2.6.0",
     "async-retry": "1.1.4",
     "consul": "0.30.0",
     "dnscache": "1.0.1",
     "eventemitter2": "5.0.1",
     "getenv": "0.7.0",
-    "lodash": "4.17.4",
-    "parse-duration": "0.1.1",
-    "seal-log": "1.2.0"
+    "lodash": "4.17.5",
+    "parse-duration": "0.1.1"
   },
   "devDependencies": {
     "@sealsystems/eslint-config-es": "1.1.1",
-    "assertthat": "0.11.0",
+    "assertthat": "1.0.0",
     "docker-host": "3.1.0",
-    "nodeenv": "0.3.1",
+    "nodeenv": "1.0.0",
     "proxyquire": "1.8.0",
-    "roboter": "0.15.6",
-    "roboter-server": "0.15.6",
-    "uuidv4": "0.5.0"
+    "roboter": "0.16.0",
+    "roboter-server": "0.16.0",
+    "uuidv4": "1.0.0"
   },
   "repository": {
     "type": "git",

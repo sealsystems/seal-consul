@@ -55,7 +55,7 @@ const watch = consul.watch({
 });
 
 watch.on('change', (nodes) => {
-  // The 'nodes' array contains data about all nodes that provide the watched service  
+  // The 'nodes' array contains data about all nodes that provide the watched service
 });
 
 watch.on('error', (err) => {
@@ -96,5 +96,5 @@ Please note: `consul.heartbeat`, `consul.lookup`, `consul.resolveService` requir
 To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
 ```bash
-$ bot
+bot
 ```
