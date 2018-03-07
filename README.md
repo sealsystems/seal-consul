@@ -1,6 +1,6 @@
 # @sealsystems/consul
 
-[![CircleCI](https://circleci.com/gh/sealsystems/seal-consul.svg?style=svg)](https://circleci.com/gh/sealsystems/seal-consul)
+[![CircleCI](https://circleci.com/gh/sealsystems/node-consul.svg?style=svg)](https://circleci.com/gh/sealsystems/node-consul)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/3y40yyflrpw10hao?svg=true)](https://ci.appveyor.com/project/Plossys/seal-consul)
 
 @sealsystems/consul provides service discovery based on Consul.
@@ -55,7 +55,7 @@ const watch = consul.watch({
 });
 
 watch.on('change', (nodes) => {
-  // The 'nodes' array contains data about all nodes that provide the watched service  
+  // The 'nodes' array contains data about all nodes that provide the watched service
 });
 
 watch.on('error', (err) => {
@@ -96,5 +96,5 @@ Please note: `consul.heartbeat`, `consul.lookup`, `consul.resolveService` requir
 To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
 ```bash
-$ bot
+bot
 ```
