@@ -1,7 +1,7 @@
 # @sealsystems/consul
 
 [![CircleCI](https://circleci.com/gh/sealsystems/node-consul.svg?style=svg)](https://circleci.com/gh/sealsystems/node-consul)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/3y40yyflrpw10hao?svg=true)](https://ci.appveyor.com/project/Plossys/seal-consul)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/9b2db9vds6i2msoy?svg=true)](https://ci.appveyor.com/project/Plossys/node-consul)
 
 @sealsystems/consul provides service discovery based on Consul.
 
