@@ -34,24 +34,6 @@ suite('util/getConsulOptions', () => {
     }).is.throwingAsync('Wrong protocol in consul url provided.');
   });
 
-  test('sets token and TLS options.', async () => {
-    keystore = {};
-
-    const options = await getConsulOptions({
-      consulUrl: 'https://foo',
-      token: 'foo'
-    });
-
-    assert.that(options).is.equalTo({
-      defaults: {
-        token: 'foo'
-      },
-      host: 'foo',
-      promisify: true,
-      secure: true
-    });
-  });
-
   suite('TLS parameter \'secure\'', () => {
     test('is set if TLS_UNPROTECTED is \'none\'.', async () => {
       const restore = nodeenv('TLS_UNPROTECTED', 'none');
@@ -96,18 +78,19 @@ suite('util/getConsulOptions', () => {
     });
   });
 
-  suite('CA certificate', () => {
-    test('is added.', async () => {
-      keystore = {
-        ca: 'ca',
-        cert: 'cert',
-        key: 'key'
-      };
+  suite('a given CA certificate is added.', async () => {
+    const restore = nodeenv('TLS_UNPROTECTED', 'none');
 
-      const options = await getConsulOptions({ consulUrl: 'https://foo' });
+    keystore = {
+      ca: 'ca',
+      cert: 'cert',
+      key: 'key'
+    };
 
-      assert.that(options.ca).is.equalTo(['ca']);
-      assert.that(options.secure).is.true();
-    });
+    const options = await getConsulOptions({ consulUrl: 'https://foo' });
+
+    assert.that(options.ca).is.equalTo(['ca']);
+    assert.that(options.secure).is.true();
+    restore();
   });
 });
