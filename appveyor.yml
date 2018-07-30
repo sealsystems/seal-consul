@@ -10,6 +10,7 @@ version: "{build}"
 environment:
   NODE_VERSION: 8.9.4
   CONSUL_VERSION: 0.7.5
+  TLS_UNPROTECTED: world
 
 install:
   # Install Node.js
