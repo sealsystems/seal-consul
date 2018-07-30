@@ -22,13 +22,9 @@ install:
       @{
         bind_addr="127.0.0.1"
         bootstrap_expect=1
-        cert_file="C:\projects\$($env:APPVEYOR_PROJECT_NAME)\tls\cert.pem"
-        data_dir="C:\ProgramData\consul\data"
-        key_file="C:\projects\$($env:APPVEYOR_PROJECT_NAME)\tls\key.pem"
         ports=@{
           dns=53
-          http=-1
-          https=8500
+          http=8500
         }
         server=$True
       } | ConvertTo-Json | Out-File -Filepath C:\ProgramData\consul\config\config.json -Encoding ascii
