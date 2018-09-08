@@ -46,8 +46,7 @@ suite('initialize', () => {
         token: ''
       },
       host: 'foo',
-      port: 1234,
-      secure: true
+      port: 1234
     });
     done();
   });
