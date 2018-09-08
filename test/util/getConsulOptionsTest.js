@@ -112,7 +112,6 @@ suite('getConsulOptions', () => {
 
       assert.that(options.ca).is.equalTo(['ca']);
       assert.that(options.secure).is.true();
-
       restore();
       done();
     });
