@@ -31,9 +31,10 @@ install:
 
       Restart-Service consul
 
+  - npm install -g roboter-cli
+  - npm install
+
 build: off
 
 test_script:
-  - npm install
-  - npm install -g roboter-cli
   - npm run bot
