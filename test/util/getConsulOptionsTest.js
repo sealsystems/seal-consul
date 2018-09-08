@@ -44,7 +44,7 @@ suite('getConsulOptions', () => {
     done();
   });
 
-  test('sets token and TLS options.', (done) => {
+  test('sets token and host.', (done) => {
     keystore = {};
 
     const options = getConsulOptions({
@@ -52,13 +52,8 @@ suite('getConsulOptions', () => {
       token: 'foo'
     });
 
-    assert.that(options).is.equalTo({
-      defaults: {
-        token: 'foo'
-      },
-      host: 'foo',
-      secure: true
-    });
+    assert.that(options.defaults).is.equalTo({ token: 'foo' });
+    assert.that(options.host).is.equalTo('foo');
     done();
   });
 
