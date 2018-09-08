@@ -100,6 +100,8 @@ suite('getConsulOptions', () => {
 
   suite('CA certificate', () => {
     test('is added.', (done) => {
+      const restore = nodeenv('TLS_UNPROTECTED', 'none');
+
       keystore = {
         ca: 'ca',
         cert: 'cert',
@@ -111,6 +113,7 @@ suite('getConsulOptions', () => {
       assert.that(options.ca).is.equalTo(['ca']);
       assert.that(options.secure).is.true();
 
+      restore();
       done();
     });
   });
