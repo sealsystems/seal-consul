@@ -10,11 +10,9 @@
   "license": "MIT",
   "scripts": {
     "bot": "bot",
-    "release": "bot release && npm publish",
-    "release-minor": "bot release --type minor && npm publish",
-    "release-major": "bot release --type major && npm publish",
+    "release": "semantic-release --branch ${CIRCLE_BRANCH}",
     "test": "bot test-units",
-    "coverage": "istanbul cover _mocha -- --recursive --ui tdd ",
+    "coverage": "nyc --reporter=text --reporter=lcov mocha",
     "report": "npm run coverage && if [[ $OSTYPE == darwin* ]]; then open=open; else open=xdg-open; fi && $open coverage/lcov-report/index.html"
   },
   "main": "lib/consul.js",
@@ -35,7 +33,8 @@
     "assertthat": "0.10.3",
     "docker-host": "3.1.0",
     "eslint-config-seal": "0.0.9",
-    "nodeenv": "0.2.1",
+    "nodeenv": "1.0.0",
+    "nyc": "13.0.1",
     "proxyquire": "1.8.0",
     "roboter": "0.15.3",
     "roboter-server": "0.15.3",
@@ -43,6 +42,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sealsystems/seal-consul.git"
+    "url": "https://github.com/sealsystems/node-consul.git"
+  },
+  "release": {
+    "extends": "@sealsystems/semantic-release-config/node-module"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

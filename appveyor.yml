@@ -8,7 +8,7 @@ version: "{build}"
 #   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 environment:
-  NODE_VERSION: 6.10.1
+  NODE_VERSION: 8.9.4
   CONSUL_VERSION: 0.7.5
 
 install:
@@ -34,9 +34,10 @@ install:
 
       Restart-Service consul
 
+  - npm install -g roboter-cli
+  - npm install
+
 build: off
 
 test_script:
-  - npm install
-  - npm install -g roboter-cli
   - npm run bot
