@@ -15,6 +15,7 @@ const mockedResolveService = proxyquire('../lib/resolveService', {
       resolveSrv (serviceName, callback) {
         if (resolveResults[resolveResultIndex]) {
           callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
+
           return resolveResultIndex++;
         }
         callback(null, []);

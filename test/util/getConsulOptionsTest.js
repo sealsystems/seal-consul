@@ -64,42 +64,42 @@ suite('getConsulOptions', () => {
 
   suite('TLS parameter \'secure\'', () => {
     test('is set if TLS_UNPROTECTED is \'none\'.', (done) => {
-      nodeenv('TLS_UNPROTECTED', 'none', (restore) => {
-        keystore = {
-          cert: 'cert',
-          key: 'key'
-        };
+      const restore = nodeenv('TLS_UNPROTECTED', 'none');
 
-        assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.true();
-        restore();
-        done();
-      });
+      keystore = {
+        cert: 'cert',
+        key: 'key'
+      };
+
+      assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.true();
+      restore();
+      done();
     });
 
     test('is set if TLS_UNPROTECTED is \'loopback\'.', (done) => {
-      nodeenv('TLS_UNPROTECTED', 'loopback', (restore) => {
-        keystore = {
-          cert: 'cert',
-          key: 'key'
-        };
+      const restore = nodeenv('TLS_UNPROTECTED', 'loopback');
 
-        assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.true();
-        restore();
-        done();
-      });
+      keystore = {
+        cert: 'cert',
+        key: 'key'
+      };
+
+      assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.true();
+      restore();
+      done();
     });
 
     test('is not set if TLS_UNPROTECTED is \'world\'.', (done) => {
-      nodeenv('TLS_UNPROTECTED', 'world', (restore) => {
-        keystore = {
-          cert: 'cert',
-          key: 'key'
-        };
+      const restore = nodeenv('TLS_UNPROTECTED', 'world');
 
-        assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.undefined();
-        restore();
-        done();
-      });
+      keystore = {
+        cert: 'cert',
+        key: 'key'
+      };
+
+      assert.that(getConsulOptions({ consulUrl: 'https://foo' }).secure).is.undefined();
+      restore();
+      done();
     });
   });
 

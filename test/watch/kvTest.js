@@ -53,6 +53,7 @@ suite('watch/kv', () => {
           if (subKeyChanged) {
             assert.that(data).is.ofType('array');
             subKeyChanged = false;
+
             return done();
           }
         });

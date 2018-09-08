@@ -54,6 +54,7 @@ suite('watch/service', () => {
             assert.that(nodes[0].host).is.ofType('string');
             assert.that(nodes[0].node).is.ofType('string');
             assert.that(nodes[0].port).is.equalTo(3000);
+
             return done();
           }
         });
@@ -88,6 +89,7 @@ suite('watch/service', () => {
             consul.warn(() => {});
           } else if (iteration === 2) {
             assert.that(nodes.length).is.equalTo(0);
+
             return done();
           }
         });
@@ -121,6 +123,7 @@ suite('watch/service', () => {
             assert.that(nodes[0].host).is.ofType('string');
             assert.that(nodes[0].node).is.ofType('string');
             assert.that(nodes[0].port).is.equalTo(3000);
+
             return done();
           }
         });

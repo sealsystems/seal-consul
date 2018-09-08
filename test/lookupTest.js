@@ -14,6 +14,7 @@ const mockedLookup = proxyquire('../lib/lookup', {
       resolve (hostname, callback) {
         if (resolveResults[resolveResultIndex]) {
           callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
+
           return resolveResultIndex++;
         }
         callback(null, []);

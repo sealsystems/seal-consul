@@ -83,6 +83,7 @@ suite('connect', () => {
         if (host === 'localhost') {
           return consul.options.address === '127.0.0.1';
         }
+
         return consul.options.address === host;
       };
 

@@ -2,9 +2,6 @@
 
 const roboter = require('roboter');
 
-// dummy require to avoid an unused dependencies error
-require('eslint-config-seal');
-
 roboter.
   workOn('server').
   equipWith((task) => {

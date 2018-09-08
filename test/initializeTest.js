@@ -7,6 +7,7 @@ let consulOptions;
 const initialize = proxyquire('../lib/initialize', {
   consul (options) {
     consulOptions = options;
+
     return {};
   }
 });
