@@ -1,3 +1,14 @@
+## 3.5.17 (2018-09-09)
+
+### Bug Fixes
+
+
+#### Access DebugConfig for data no longer contained in Config section ([f0769b3](https://github.com/sealsystems/node-consul/commit/f0769b3))
+
+
+
+---
+
 ## 3.5.16 (2018-09-09)
 
 ### Bug Fixes
