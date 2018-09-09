@@ -1,3 +1,14 @@
+## 3.5.16 (2018-09-09)
+
+### Bug Fixes
+
+
+#### Fix .npmignore ([2a59db0](https://github.com/sealsystems/node-consul/commit/2a59db0))
+
+
+
+---
+
 ## 3.5.15 (2018-09-09)
 
 ### Bug Fixes
