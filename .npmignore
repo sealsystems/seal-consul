@@ -1,4 +1,3 @@
 *
 !/bin/**
-!/lib/**#
-!/package.json
+!/lib/**
