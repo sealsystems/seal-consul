@@ -9,35 +9,33 @@
   },
   "license": "MIT",
   "scripts": {
-    "bot": "bot",
     "release": "semantic-release --branch ${CIRCLE_BRANCH}",
-    "test": "bot test-units",
+    "test": "npx roboter test",
     "coverage": "nyc --reporter=text --reporter=lcov mocha",
     "report": "npm run coverage && if [[ $OSTYPE == darwin* ]]; then open=open; else open=xdg-open; fi && $open coverage/lcov-report/index.html"
   },
   "main": "lib/consul.js",
   "dependencies": {
     "@sealsystems/droddel": "2.0.0",
-    "@sealsystems/tlscert": "2.0.0",
-    "app-root-path": "2.0.1",
-    "async-retry": "1.1.4",
-    "consul": "0.30.0",
+    "@sealsystems/tlscert": "2.1.2",
+    "app-root-path": "2.1.0",
+    "async-retry": "1.2.3",
+    "consul": "0.34.1",
     "dnscache": "1.0.1",
     "eventemitter2": "5.0.1",
     "getenv": "0.7.0",
-    "lodash": "4.17.5",
+    "lodash.flatten": "4.4.0",
     "parse-duration": "0.1.1"
   },
   "devDependencies": {
     "@sealsystems/eslint-config-es": "1.1.1",
-    "assertthat": "1.0.0",
+    "assertthat": "2.0.0",
     "docker-host": "3.1.0",
     "nodeenv": "1.0.0",
-    "nyc": "13.0.1",
-    "proxyquire": "1.8.0",
-    "roboter": "0.16.0",
-    "roboter-server": "0.16.0",
-    "uuidv4": "1.0.0"
+    "nyc": "13.1.0",
+    "proxyquire": "2.1.0",
+    "roboter": "3.0.3",
+    "uuidv4": "2.0.0"
   },
   "repository": {
     "type": "git",
