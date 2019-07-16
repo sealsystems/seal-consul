@@ -10,17 +10,18 @@ const resolveService = require('../lib/resolveService');
 let resolveResults;
 let resolveResultIndex;
 const mockedResolveService = proxyquire('../lib/resolveService', {
-  dnscache () {
-    return {
-      resolveSrv (serviceName, callback) {
-        if (resolveResults[resolveResultIndex]) {
-          callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
-
-          return resolveResultIndex++;
+  './dnsWrapper': {
+    async resolveSrv () {
+      if (resolveResults[resolveResultIndex]) {
+        if (resolveResults[resolveResultIndex].err) {
+          throw resolveResults[resolveResultIndex++].err;
         }
-        callback(null, []);
+
+        return resolveResults[resolveResultIndex++].result;
       }
-    };
+
+      return [];
+    }
   }
 });
 

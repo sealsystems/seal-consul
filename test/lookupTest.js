@@ -9,17 +9,18 @@ const lookup = require('../lib/lookup');
 let resolveResults;
 let resolveResultIndex;
 const mockedLookup = proxyquire('../lib/lookup', {
-  dnscache () {
-    return {
-      resolve (hostname, callback) {
-        if (resolveResults[resolveResultIndex]) {
-          callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
-
-          return resolveResultIndex++;
+  './dnsWrapper': {
+    async resolve () {
+      if (resolveResults[resolveResultIndex]) {
+        if (resolveResults[resolveResultIndex].err) {
+          throw resolveResults[resolveResultIndex++].err;
         }
-        callback(null, []);
+
+        return resolveResults[resolveResultIndex++].result;
       }
-    };
+
+      return [];
+    }
   }
 });
 

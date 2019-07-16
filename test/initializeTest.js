@@ -38,7 +38,8 @@ suite('initialize', () => {
       },
       host: 'foo',
       promisify: true,
-      port: 1234
+      port: 1234,
+      secure: true
     });
   });
 });
