@@ -14,13 +14,15 @@ suite('watch/service', () => {
   });
 
   test('throws an error if service name is missing.', async () => {
-    await assert.that(async () => {
-      await service({});
-    }).is.throwingAsync('Service name is missing.');
+    await assert
+      .that(async () => {
+        await service({});
+      })
+      .is.throwingAsync('Service name is missing.');
   });
 
   suite('sends notification', () => {
-    test('about services that are already running at start.', async function () {
+    test('about services that are already running at start.', async function() {
       this.timeout(10000);
 
       const serviceName = uuid();
@@ -57,7 +59,7 @@ suite('watch/service', () => {
       });
     });
 
-    test('if an active service fails.', async function () {
+    test('if an active service fails.', async function() {
       this.timeout(10000);
 
       const serviceName = uuid();
@@ -84,6 +86,7 @@ suite('watch/service', () => {
                 assert.that(nodes[0].host).is.ofType('string');
                 assert.that(nodes[0].node).is.ofType('string');
                 assert.that(nodes[0].port).is.equalTo(3000);
+                // eslint-disable-next-line no-empty-function
                 await consul.warn(() => {});
                 break;
               }
@@ -101,7 +104,7 @@ suite('watch/service', () => {
       });
     });
 
-    test('if a broken service is up again.', async function () {
+    test('if a broken service is up again.', async function() {
       this.timeout(10000);
 
       const serviceName = uuid();
@@ -124,6 +127,7 @@ suite('watch/service', () => {
             switch (iteration) {
               case 1: {
                 assert.that(nodes.length).is.equalTo(0);
+                // eslint-disable-next-line no-empty-function
                 await consul.pass(() => {});
                 break;
               }

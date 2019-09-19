@@ -7,7 +7,7 @@ const proxyquire = require('proxyquire');
 let keystore;
 const getConsulOptions = proxyquire('../../lib/util/getConsulOptions', {
   '@sealsystems/tlscert': {
-    async get () {
+    async get() {
       return keystore;
     }
   }
@@ -23,19 +23,23 @@ suite('util/getConsulOptions', () => {
   });
 
   test('throws an error if Consul url is missing', async () => {
-    await assert.that(async () => {
-      await getConsulOptions({});
-    }).is.throwingAsync('Consul url is missing.');
+    await assert
+      .that(async () => {
+        await getConsulOptions({});
+      })
+      .is.throwingAsync('Consul url is missing.');
   });
 
   test('returns an error if protocol of Consul url is unknown', async () => {
-    await assert.that(async () => {
-      await getConsulOptions({ consulUrl: 'foo://localhost:8500' });
-    }).is.throwingAsync('Wrong protocol in consul url provided.');
+    await assert
+      .that(async () => {
+        await getConsulOptions({ consulUrl: 'foo://localhost:8500' });
+      })
+      .is.throwingAsync('Wrong protocol in consul url provided.');
   });
 
-  suite('TLS parameter \'secure\'', () => {
-    test('is set if TLS_UNPROTECTED is \'none\'.', async () => {
+  suite("TLS parameter 'secure'", () => {
+    test("is set if TLS_UNPROTECTED is 'none'.", async () => {
       const restore = nodeenv('TLS_UNPROTECTED', 'none');
 
       keystore = {
@@ -49,7 +53,7 @@ suite('util/getConsulOptions', () => {
       restore();
     });
 
-    test('is set if TLS_UNPROTECTED is \'loopback\'.', async () => {
+    test("is set if TLS_UNPROTECTED is 'loopback'.", async () => {
       const restore = nodeenv('TLS_UNPROTECTED', 'loopback');
 
       keystore = {
@@ -63,7 +67,7 @@ suite('util/getConsulOptions', () => {
       restore();
     });
 
-    test('is not set if TLS_UNPROTECTED is \'world\'.', async () => {
+    test("is not set if TLS_UNPROTECTED is 'world'.", async () => {
       const restore = nodeenv('TLS_UNPROTECTED', 'world');
 
       keystore = {
@@ -78,6 +82,7 @@ suite('util/getConsulOptions', () => {
     });
   });
 
+  // eslint-disable-next-line mocha/no-async-describe
   suite('a given CA certificate is added.', async () => {
     const restore = nodeenv('TLS_UNPROTECTED', 'none');
 

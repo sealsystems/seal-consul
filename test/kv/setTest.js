@@ -31,15 +31,19 @@ suite('kv/set', () => {
   });
 
   test('throws error if key is missing', async () => {
-    await assert.that(async () => {
-      await consul.setKv({});
-    }).is.throwingAsync('Key is missing.');
+    await assert
+      .that(async () => {
+        await consul.setKv({});
+      })
+      .is.throwingAsync('Key is missing.');
   });
 
   test('throws error if value is missing', async () => {
-    await assert.that(async () => {
-      await consul.setKv({ key: 'hugo' });
-    }).is.throwingAsync('Value is missing.');
+    await assert
+      .that(async () => {
+        await consul.setKv({ key: 'hugo' });
+      })
+      .is.throwingAsync('Value is missing.');
   });
 
   test('set a value', async () => {
