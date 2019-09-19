@@ -25,7 +25,7 @@
     "@sealsystems/tlscert": "git+https://git@github.com/sealsystems/node-tlscert.git#PLS-431",
     "app-root-path": "2.2.1",
     "async-retry": "1.2.3",
-    "consul": "0.35.0",
+    "consul": "0.30.0",
     "dnscache": "1.0.2",
     "eventemitter2": "5.0.1",
     "getenv": "0.7.0",
