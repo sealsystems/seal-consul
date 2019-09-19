@@ -21,8 +21,8 @@
   },
   "main": "lib/consul.js",
   "dependencies": {
-    "@sealsystems/droddel": "git+https://898e716743b87ad533dbaa5e8c6e5b29c4bfc7eb:x-oauth-basic@github.com/sealsystems/node-droddel.git#PLS-431",
-    "@sealsystems/tlscert": "git+https://898e716743b87ad533dbaa5e8c6e5b29c4bfc7eb:x-oauth-basic@github.com/sealsystems/node-tlscert.git#PLS-431",
+    "@sealsystems/droddel": "git+https://git@github.com/sealsystems/node-droddel.git#PLS-431",
+    "@sealsystems/tlscert": "git+https://git@github.com/sealsystems/node-tlscert.git#PLS-431",
     "app-root-path": "2.0.1",
     "async-retry": "1.1.4",
     "consul": "0.30.0",
