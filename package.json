@@ -23,13 +23,13 @@
   "dependencies": {
     "@sealsystems/droddel": "git+https://git@github.com/sealsystems/node-droddel.git#PLS-431",
     "@sealsystems/tlscert": "git+https://git@github.com/sealsystems/node-tlscert.git#PLS-431",
-    "app-root-path": "2.0.1",
-    "async-retry": "1.1.4",
-    "consul": "0.30.0",
-    "dnscache": "1.0.1",
+    "app-root-path": "2.2.1",
+    "async-retry": "1.2.3",
+    "consul": "0.35.0",
+    "dnscache": "1.0.2",
     "eventemitter2": "5.0.1",
     "getenv": "0.7.0",
-    "lodash": "4.17.5",
+    "lodash": "4.17.15",
     "parse-duration": "0.1.1"
   },
   "devDependencies": {
@@ -38,8 +38,8 @@
     "@sealsystems/semantic-release": "4.0.12",
     "docker-host": "3.1.0",
     "nodeenv": "1.0.0",
-    "proxyquire": "1.8.0",
-    "uuidv4": "1.0.0"
+    "proxyquire": "2.1.3",
+    "uuid": "3.3.3"
   },
   "repository": {
     "type": "git",
