@@ -3,7 +3,7 @@
 const assert = require('assertthat');
 const proxyquire = require('proxyquire');
 
-const getConsulId = proxyquire('../lib/getConsulId', {
+const getConsulId = proxyquire('../../lib/consul/getConsulId', {
   os: {
     hostname() {
       return 'localhost';
@@ -11,7 +11,7 @@ const getConsulId = proxyquire('../lib/getConsulId', {
   }
 });
 
-suite('getConsulId', () => {
+suite('consul.getConsulId', () => {
   test('is a function.', async () => {
     assert.that(getConsulId).is.ofType('function');
   });

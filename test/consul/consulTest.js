@@ -3,12 +3,12 @@
 const assert = require('assertthat');
 const proxyquire = require('proxyquire');
 
-const consul = require('../lib/consul');
+const consul = require('../../lib/consul');
 
 let resolveResults;
 let resolveResultIndex;
 
-const mockedConsul = proxyquire('../lib/consul', {
+const mockedConsul = proxyquire('../../lib/consul', {
   dns: {
     resolve(hostname, callback) {
       if (resolveResults[resolveResultIndex]) {
@@ -29,7 +29,7 @@ const mockedConsul = proxyquire('../lib/consul', {
   }
 });
 
-suite('consul', () => {
+suite('consul.index', () => {
   setup(async () => {
     mockedConsul.retryOptions = {
       retries: 5,

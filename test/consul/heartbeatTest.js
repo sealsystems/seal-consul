@@ -2,9 +2,9 @@
 
 const assert = require('assertthat');
 
-const heartbeat = require('../lib/heartbeat');
+const heartbeat = require('../../lib/consul/heartbeat');
 
-suite('heartbeat', () => {
+suite('consul.heartbeat', () => {
   test('is a function.', async () => {
     assert.that(heartbeat).is.ofType('function');
   });

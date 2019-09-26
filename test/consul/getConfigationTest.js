@@ -2,9 +2,9 @@
 
 const assert = require('assertthat');
 
-const getConfiguration = require('../lib/getConfiguration');
+const getConfiguration = require('../../lib/consul/getConfiguration');
 
-suite('getConfiguration', () => {
+suite('consul.getConfiguration', () => {
   test('is a function.', async () => {
     assert.that(getConfiguration).is.ofType('function');
   });

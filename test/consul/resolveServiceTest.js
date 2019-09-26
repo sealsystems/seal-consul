@@ -4,12 +4,12 @@ const assert = require('assertthat');
 const proxyquire = require('proxyquire');
 const uuid = require('uuid/v4');
 
-const consul = require('../lib/consul');
-const resolveService = require('../lib/resolveService');
+const consul = require('../../lib/consul');
+const resolveService = require('../../lib/consul/resolveService');
 
 let resolveResults;
 let resolveResultIndex;
-const mockedResolveService = proxyquire('../lib/resolveService', {
+const mockedResolveService = proxyquire('../../lib/consul/resolveService', {
   './dnsWrapper': {
     async resolveSrv() {
       if (resolveResults[resolveResultIndex]) {
@@ -25,7 +25,7 @@ const mockedResolveService = proxyquire('../lib/resolveService', {
   }
 });
 
-suite('resolveService', () => {
+suite('consul.resolveService', () => {
   const serviceName = uuid();
   const servicePort = 3000;
 

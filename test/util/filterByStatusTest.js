@@ -4,7 +4,7 @@ const assert = require('assertthat');
 
 const filterByStatus = require('../../lib/util/filterByStatus');
 
-suite('util/filterByStatus', () => {
+suite('util.filterByStatus', () => {
   test('is a function.', async () => {
     assert.that(filterByStatus).is.ofType('function');
   });
