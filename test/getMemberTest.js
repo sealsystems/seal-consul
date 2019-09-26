@@ -10,26 +10,30 @@ suite('getMember', () => {
   });
 
   test('throws error if agent is not initialized', async () => {
-    await assert.that(async () => {
-      await getMember.call({});
-    }).is.throwingAsync('Agent not initialized.');
+    await assert
+      .that(async () => {
+        await getMember.call({});
+      })
+      .is.throwingAsync('Agent not initialized.');
   });
 
   test('returns an error if querying Consul failed.', async () => {
     const agent = {
-      async self () {
+      async self() {
         throw new Error('foo');
       }
     };
 
-    await assert.that(async () => {
-      await getMember.call({ agent });
-    }).is.throwingAsync('foo');
+    await assert
+      .that(async () => {
+        await getMember.call({ agent });
+      })
+      .is.throwingAsync('foo');
   });
 
   test('returns the member info provided by Consul.', async () => {
     const agent = {
-      async self () {
+      async self() {
         return {
           Config: {
             Datacenter: 'dc1',

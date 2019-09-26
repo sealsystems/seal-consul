@@ -10,7 +10,7 @@ let resolveResults;
 let resolveResultIndex;
 const mockedLookup = proxyquire('../lib/lookup', {
   './dnsWrapper': {
-    async resolve () {
+    async resolve() {
       if (resolveResults[resolveResultIndex]) {
         if (resolveResults[resolveResultIndex].err) {
           throw resolveResults[resolveResultIndex++].err;
@@ -43,9 +43,11 @@ suite('lookup', () => {
   });
 
   test('throws an error if hostname is missing.', async () => {
-    await assert.that(async () => {
-      await lookup();
-    }).is.throwingAsync('Hostname is missing.');
+    await assert
+      .that(async () => {
+        await lookup();
+      })
+      .is.throwingAsync('Hostname is missing.');
   });
 
   test('returns ip address of host', async () => {
@@ -61,9 +63,11 @@ suite('lookup', () => {
   });
 
   test('returns error if service is not available', async () => {
-    await assert.that(async () => {
-      await mockedLookup.call(consul, 'hugo');
-    }).is.throwingAsync('No addresses found');
+    await assert
+      .that(async () => {
+        await mockedLookup.call(consul, 'hugo');
+      })
+      .is.throwingAsync('No addresses found');
   });
 
   test('retries after failure', async () => {
@@ -82,7 +86,7 @@ suite('lookup', () => {
     assert.that(ip).is.equalTo('127.0.0.1');
   });
 
-  test('gives up after 5 retries', async function () {
+  test('gives up after 5 retries', async function() {
     this.timeout(5 * 1000);
     resolveResults = [
       {
@@ -105,8 +109,10 @@ suite('lookup', () => {
       }
     ];
 
-    await assert.that(async () => {
-      await mockedLookup.call(consul, 'hugo');
-    }).is.throwingAsync((e) => e === resolveResults[5].err);
+    await assert
+      .that(async () => {
+        await mockedLookup.call(consul, 'hugo');
+      })
+      .is.throwingAsync((e) => e === resolveResults[5].err);
   });
 });

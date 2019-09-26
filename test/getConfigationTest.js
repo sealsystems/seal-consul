@@ -10,26 +10,30 @@ suite('getConfiguration', () => {
   });
 
   test('throws error if agent is not initialized', async () => {
-    await assert.that(async () => {
-      await getConfiguration.call({});
-    }).is.throwingAsync('Agent not initialized.');
+    await assert
+      .that(async () => {
+        await getConfiguration.call({});
+      })
+      .is.throwingAsync('Agent not initialized.');
   });
 
   test('returns an error if querying Consul failed.', async () => {
     const agent = {
-      async self () {
+      async self() {
         throw new Error('foo');
       }
     };
 
-    await assert.that(async () => {
-      await getConfiguration.call({ agent });
-    }).is.throwingAsync('foo');
+    await assert
+      .that(async () => {
+        await getConfiguration.call({ agent });
+      })
+      .is.throwingAsync('foo');
   });
 
   test('returns the config provided by Consul.', async () => {
     const agent = {
-      async self () {
+      async self() {
         return {
           Config: {
             Datacenter: 'dc1',
@@ -50,7 +54,7 @@ suite('getConfiguration', () => {
     let wasCalled = false;
 
     const agent = {
-      async self () {
+      async self() {
         wasCalled = true;
       }
     };
