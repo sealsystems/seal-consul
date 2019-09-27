@@ -31,9 +31,11 @@ suite('kv/get', () => {
   });
 
   test('throws error if key is missing', async () => {
-    await assert.that(async () => {
-      await consul.getKvs({});
-    }).is.throwingAsync('Key is missing.');
+    await assert
+      .that(async () => {
+        await consul.getKvs({});
+      })
+      .is.throwingAsync('Key is missing.');
   });
 
   test('get value', async () => {

@@ -29,7 +29,6 @@ install:
       } | ConvertTo-Json | Out-File -Filepath C:\ProgramData\consul\config\config.json -Encoding ascii
       Restart-Service consul
   # Install dependencies
-  - npm install -g roboter-cli
   - npm install
 
 build: off

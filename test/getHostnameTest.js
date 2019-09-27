@@ -11,19 +11,21 @@ suite('getHostname', () => {
 
   test('returns an error if querying Consul failed.', async () => {
     const agent = {
-      async self () {
+      async self() {
         throw new Error('foo');
       }
     };
 
-    await assert.that(async () => {
-      await getHostname.call({ agent });
-    }).is.throwingAsync('foo');
+    await assert
+      .that(async () => {
+        await getHostname.call({ agent });
+      })
+      .is.throwingAsync('foo');
   });
 
   test('returns the hostname provided by Consul.', async () => {
     const agent = {
-      async self () {
+      async self() {
         return {
           Config: {
             NodeName: 'foo',
@@ -44,7 +46,7 @@ suite('getHostname', () => {
     let wasCalled = false;
 
     const agent = {
-      async self () {
+      async self() {
         wasCalled = true;
       }
     };

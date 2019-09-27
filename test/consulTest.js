@@ -10,7 +10,7 @@ let resolveResultIndex;
 
 const mockedConsul = proxyquire('../lib/consul', {
   dns: {
-    resolve (hostname, callback) {
+    resolve(hostname, callback) {
       if (resolveResults[resolveResultIndex]) {
         callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
 
@@ -19,7 +19,7 @@ const mockedConsul = proxyquire('../lib/consul', {
       callback(null, []);
     },
 
-    lookup (hostname, callback) {
+    lookup(hostname, callback) {
       if (!hostname) {
         return callback(null, null);
       }

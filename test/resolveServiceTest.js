@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 const proxyquire = require('proxyquire');
-const uuid = require('uuidv4');
+const uuid = require('uuid/v4');
 
 const consul = require('../lib/consul');
 const resolveService = require('../lib/resolveService');
@@ -10,9 +10,9 @@ const resolveService = require('../lib/resolveService');
 let resolveResults;
 let resolveResultIndex;
 const mockedResolveService = proxyquire('../lib/resolveService', {
-  dnscache () {
+  dnscache() {
     return {
-      resolveSrv (serviceName, callback) {
+      resolveSrv(serviceName, callback) {
         if (resolveResults[resolveResultIndex]) {
           callback(resolveResults[resolveResultIndex].err, resolveResults[resolveResultIndex].result);
 
@@ -46,19 +46,23 @@ suite('resolveService', () => {
   });
 
   test('throws an error if service name is missing.', async () => {
-    await assert.that(async () => {
-      await resolveService();
-    }).is.throwingAsync('Service name is missing.');
+    await assert
+      .that(async () => {
+        await resolveService();
+      })
+      .is.throwingAsync('Service name is missing.');
   });
 
   test('returns list of hosts', async () => {
     resolveResults = [
       {
         err: null,
-        result: [{
-          name: 'node1.node.dc1.consul',
-          port: servicePort
-        }]
+        result: [
+          {
+            name: 'node1.node.dc1.consul',
+            port: servicePort
+          }
+        ]
       }
     ];
 
@@ -102,9 +106,11 @@ suite('resolveService', () => {
       }
     ];
 
-    await assert.that(async () => {
-      await mockedResolveService.call(consul, 'hugo');
-    }).is.throwingAsync((e) => e === errNoData);
+    await assert
+      .that(async () => {
+        await mockedResolveService.call(consul, 'hugo');
+      })
+      .is.throwingAsync((e) => e === errNoData);
   });
 
   test('gives up after 5 retries', async () => {
@@ -129,8 +135,10 @@ suite('resolveService', () => {
       }
     ];
 
-    await assert.that(async () => {
-      await mockedResolveService.call(consul, 'hugo');
-    }).is.throwingAsync((e) => e === resolveResults[5].err);
+    await assert
+      .that(async () => {
+        await mockedResolveService.call(consul, 'hugo');
+      })
+      .is.throwingAsync((e) => e === resolveResults[5].err);
   });
 });
