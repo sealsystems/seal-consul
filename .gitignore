@@ -3,15 +3,20 @@ node_modules/
 npm-debug.log
 
 # Coverage
+.nyc_output/
 coverage/
 
-# IntelliJ
-.idea
-*.iml
+# CI
+output/
+temp/
 
 # Vi
 *.swp
 *~
 
-# OS X generated files and folders
+# MacOS
 .DS_Store
+
+# Misc
+*.stat
+*.log
