@@ -27,7 +27,7 @@
     "app-root-path": "2.2.1",
     "async-retry": "1.2.3",
     "cache": "2.1.0",
-    "consul": "0.30.0",
+    "consul": "0.36.0",
     "eventemitter2": "5.0.1",
     "getenv": "0.7.0",
     "lodash": "4.17.15",
