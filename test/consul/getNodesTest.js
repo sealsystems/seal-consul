@@ -4,10 +4,10 @@ const assert = require('assertthat');
 const host = require('docker-host')().host;
 const uuid = require('uuid/v4');
 
-const consul = require('../lib/consul');
-const getNodes = require('../lib/getNodes');
+const consul = require('../../lib/consul');
+const getNodes = require('../../lib/consul/getNodes');
 
-suite('getNodes', () => {
+suite('consul.getNodes', () => {
   const serviceName = uuid();
 
   suiteSetup(async () => {

@@ -8,7 +8,7 @@ const consul = require('../../lib/consul');
 
 const kvTree = require('../../lib/watch/kv');
 
-suite('watch/kv', () => {
+suite('watch.kv', () => {
   test('is a function.', async () => {
     assert.that(kvTree).is.ofType('function');
   });
