@@ -83,6 +83,11 @@ CONSUL_DOMAIN=sealsystems.com
 
 This will change the expanded service name given above to: `checkout.service.sealsystems.com`
 
+## Using in cloud environment
+
+To enable cloud environment set the environment variable `SERVICE_DISCOVERY` to the value `cloud`. To disable cloud environment unset the variable or set it to the value `consul`. Additionally the environment variable `SERVICE_DISCOVERY_PORT` defines the https port all services are available. Default is `3000`.
+
+
 ## Initializing without connecting first
 
 It is assumed that you call `consul.connect` first. This will establish the connection to the local Consul agent. The other functions (e.g. `consul.getHostname`) will throw an error if this connection has not been initialized.

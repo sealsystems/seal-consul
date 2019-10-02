@@ -8,7 +8,7 @@ const consul = require('../../lib/consul');
 
 const service = require('../../lib/watch/service');
 
-suite('watch/service', () => {
+suite('watch.service', () => {
   test('is a function.', async () => {
     assert.that(service).is.ofType('function');
   });

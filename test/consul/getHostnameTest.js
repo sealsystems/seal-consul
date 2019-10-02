@@ -2,9 +2,9 @@
 
 const assert = require('assertthat');
 
-const getHostname = require('../lib/getHostname');
+const getHostname = require('../../lib/consul/getHostname');
 
-suite('getHostname', () => {
+suite('consul.getHostname', () => {
   test('is a function.', async () => {
     assert.that(getHostname).is.ofType('function');
   });

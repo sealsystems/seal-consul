@@ -5,7 +5,7 @@ const { EventEmitter2 } = require('eventemitter2');
 
 const EventEmitter = require('../../lib/util/EventEmitter');
 
-suite('util/EventEmitter', () => {
+suite('util.EventEmitter', () => {
   test('is a function.', async () => {
     assert.that(EventEmitter).is.ofType('function');
   });

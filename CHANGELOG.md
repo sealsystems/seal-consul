@@ -1,3 +1,36 @@
+## 5.0.0 (2019-10-01)
+
+
+
+####  ([08031cf](https://github.com/sealsystems/node-consul/commit/08031cf))
+
+
+
+### BREAKING CHANGES
+
+#### Consul client is not any longer used in case of running in a cloud environment. Most `node-consul` functions are defined empty or throwing an error in cloud.
+If running in cloud or on premise is configured using the environment variable `SERVICE_DISCOVERY`. Possible values are `cloud` and `consul`, default is `consul`.
+Additionally the overall service port may be configured using the environment variable `SERVICE_DISCOVERY_PORT`, default is 3000.
+
+---
+
+## 4.1.0 (2019-09-27)
+
+### Features
+
+
+#### PLS-431 ([e92b889](https://github.com/sealsystems/node-consul/commit/e92b889))
+
+- Added dependabot config
+ - Added GitHub Pull Request template
+ - Updated appveyor config
+ - Updated CircleCI config
+ - Updated dependencies
+ - Fixed linting
+
+
+---
+
 ## 4.0.1 (2018-11-13)
 
 ### Bug Fixes

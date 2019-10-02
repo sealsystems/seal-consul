@@ -12,7 +12,7 @@ const connectOptions = {
   serviceUrl: 'http://localhost:19876'
 };
 
-suite('kv/set', () => {
+suite('kv.set', () => {
   suiteSetup(async () => await consul.connect(connectOptions));
 
   suiteTeardown(async () => {

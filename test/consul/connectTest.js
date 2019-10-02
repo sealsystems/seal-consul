@@ -2,11 +2,11 @@
 
 const assert = require('assertthat');
 
-const consul = require('../lib/consul');
+const consul = require('../../lib/consul');
 
 const host = require('docker-host')().host;
 
-suite('connect', () => {
+suite('consul.connect', () => {
   setup(async () => {
     consul.retryOptions = {
       retries: 5,
@@ -95,7 +95,7 @@ suite('connect', () => {
     assert.that(consul.options.tags[0]).is.equalTo('tag1');
     assert.that(consul.options.tags[1]).is.equalTo('tag2');
     // eslint-disable-next-line global-require
-    assert.that(consul.options.tags[2]).is.equalTo(require('../package.json').version.replace(/\./g, '-'));
+    assert.that(consul.options.tags[2]).is.equalTo(require('../../package.json').version.replace(/\./g, '-'));
   });
 
   test('ignores empty service tags.', async () => {
@@ -109,7 +109,7 @@ suite('connect', () => {
     assert.that(consul.options.tags.length).is.equalTo(2);
     assert.that(consul.options.tags[0]).is.equalTo('tag');
     // eslint-disable-next-line global-require
-    assert.that(consul.options.tags[1]).is.equalTo(require('../package.json').version.replace(/\./g, '-'));
+    assert.that(consul.options.tags[1]).is.equalTo(require('../../package.json').version.replace(/\./g, '-'));
   });
 
   test('does not set address if there is no hostname in "serviceUrl".', async function() {

@@ -4,7 +4,7 @@ const assert = require('assertthat');
 const proxyquire = require('proxyquire');
 
 let consulOptions;
-const initialize = proxyquire('../lib/initialize', {
+const initialize = proxyquire('../../lib/consul/initialize', {
   consul(options) {
     consulOptions = options;
 
@@ -12,7 +12,7 @@ const initialize = proxyquire('../lib/initialize', {
   }
 });
 
-suite('initialize', () => {
+suite('consul.initialize', () => {
   setup(() => {
     consulOptions = null;
   });
