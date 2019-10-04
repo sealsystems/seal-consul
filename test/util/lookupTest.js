@@ -3,12 +3,11 @@
 const assert = require('assertthat');
 const proxyquire = require('proxyquire');
 
-const consul = require('../../lib/consul');
-const lookup = require('../../lib/consul/lookup');
+const lookup = require('../../lib/util/lookup');
 
 let resolveResults;
 let resolveResultIndex;
-const mockedLookup = proxyquire('../../lib/consul/lookup', {
+const mockedLookup = proxyquire('../../lib/util/lookup', {
   './dnsWrapper': {
     async resolve() {
       if (resolveResults[resolveResultIndex]) {
@@ -24,14 +23,18 @@ const mockedLookup = proxyquire('../../lib/consul/lookup', {
   }
 });
 
-suite('consul.lookup', () => {
+suite('util.lookup', () => {
+  let consul;
+
   setup(async () => {
-    consul.retryOptions = {
-      retries: 5,
-      minTimeout: 0.1 * 1000,
-      maxTimeout: 0.2 * 1000,
-      factor: 2,
-      randomize: true
+    consul = {
+      retryOptions: {
+        retries: 5,
+        minTimeout: 0.1 * 1000,
+        maxTimeout: 0.2 * 1000,
+        factor: 2,
+        randomize: true
+      }
     };
 
     resolveResults = [];

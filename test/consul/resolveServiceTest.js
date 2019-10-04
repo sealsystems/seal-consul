@@ -10,7 +10,7 @@ const resolveService = require('../../lib/consul/resolveService');
 let resolveResults;
 let resolveResultIndex;
 const mockedResolveService = proxyquire('../../lib/consul/resolveService', {
-  './dnsWrapper': {
+  '../util/dnsWrapper': {
     async resolveSrv() {
       if (resolveResults[resolveResultIndex]) {
         if (resolveResults[resolveResultIndex].err) {
