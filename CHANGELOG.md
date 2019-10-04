@@ -1,3 +1,14 @@
+## 5.0.1 (2019-10-04)
+
+### Bug Fixes
+
+
+#### fixed bug in cloud version of resolveService ([53db833](https://github.com/sealsystems/node-consul/commit/53db833))
+
+
+
+---
+
 ## 5.0.0 (2019-10-01)
 
 
