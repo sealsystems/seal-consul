@@ -1,6 +1,6 @@
 {
   "name": "@sealsystems/consul",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "@sealsystems/consul provides service discovery based on Consul.",
   "author": {
     "name": "SEAL Systems AG",
@@ -36,9 +36,8 @@
   "devDependencies": {
     "@sealsystems/eslint-config-es": "3.6.0",
     "@sealsystems/mocha": "4.1.1",
-    "@sealsystems/semantic-release": "4.0.12",
+    "@sealsystems/semantic-release": "4.0.13",
     "docker-host": "3.1.0",
-    "ipaddr.js": "1.9.1",
     "mockery": "2.1.0",
     "nodeenv": "1.0.0",
     "proxyquire": "2.1.3",

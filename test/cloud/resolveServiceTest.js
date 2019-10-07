@@ -15,10 +15,10 @@ suite('cloud.resolveService', () => {
   });
 
   test('resolves service name and default port', async () => {
-    const service = await resolveService('otto');
+    const services = await resolveService('otto');
 
-    assert.that(service).is.ofType('object');
-    assert.that(service.port).is.equalTo(3000);
-    assert.that(service.name).is.equalTo('otto');
+    assert.that(services).is.ofType('array');
+    assert.that(services[0].port).is.equalTo(3000);
+    assert.that(services[0].name).is.equalTo('otto');
   });
 });
