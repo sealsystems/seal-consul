@@ -22,7 +22,7 @@
   "main": "lib/consul.js",
   "dependencies": {
     "@sealsystems/droddel": "git+https://git@github.com/sealsystems/node-droddel.git#PLS-431",
-    "@sealsystems/error": "git+https://git@github.com/sealsystems/node-error.git#PLS-431",
+    "@sealsystems/error": "2.2.0",
     "@sealsystems/tlscert": "git+https://git@github.com/sealsystems/node-tlscert.git#PLS-431",
     "app-root-path": "2.2.1",
     "async-retry": "1.2.3",
