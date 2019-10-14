@@ -21,9 +21,9 @@
   },
   "main": "lib/consul.js",
   "dependencies": {
-    "@sealsystems/droddel": "2.1.0",
-    "@sealsystems/error": "2.1.0",
-    "@sealsystems/tlscert": "2.2.0",
+    "@sealsystems/droddel": "2.2.0",
+    "@sealsystems/error": "2.2.0",
+    "@sealsystems/tlscert": "2.3.0",
     "app-root-path": "2.2.1",
     "async-retry": "1.2.3",
     "cache": "2.1.0",
@@ -34,7 +34,7 @@
     "parse-duration": "0.1.1"
   },
   "devDependencies": {
-    "@sealsystems/eslint-config-es": "3.5.4",
+    "@sealsystems/eslint-config-es": "3.6.0",
     "@sealsystems/mocha": "4.1.1",
     "@sealsystems/semantic-release": "4.0.13",
     "docker-host": "3.1.0",
