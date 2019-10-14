@@ -1,3 +1,21 @@
+## 5.1.0 (2019-10-14)
+
+### Features
+
+
+#### PLS-431 ([628071b](https://github.com/sealsystems/node-consul/commit/628071b))
+
+- Updated dependencies
+ - Updated AppVeyor config
+ - Updated CircleCI config
+ - Added dependabot config
+ - Added GitHub Pull Request template
+ - Fixed linting
+ - Used `seal-node:oss-module-update`
+
+
+---
+
 ## 5.0.1 (2019-10-04)
 
 ### Bug Fixes
