@@ -23,7 +23,7 @@
   "dependencies": {
     "@sealsystems/droddel": "2.2.0",
     "@sealsystems/error": "2.2.0",
-    "@sealsystems/tlscert": "git+https://git@github.com/sealsystems/node-tlscert.git#PLS-431",
+    "@sealsystems/tlscert": "2.3.0",
     "app-root-path": "2.2.1",
     "async-retry": "1.2.3",
     "cache": "2.1.0",
