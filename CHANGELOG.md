@@ -1,3 +1,14 @@
+## 5.1.2 (2019-10-17)
+
+### Chores
+
+
+#### fixed bug ([5a3c20d](https://github.com/sealsystems/node-consul/commit/5a3c20d))
+
+
+
+---
+
 ## 5.1.1 (2019-10-17)
 
 ### Chores
