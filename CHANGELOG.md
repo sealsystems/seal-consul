@@ -1,3 +1,14 @@
+## 5.1.1 (2019-10-17)
+
+### Chores
+
+
+#### fix lookup in cloud ([0429e2e](https://github.com/sealsystems/node-consul/commit/0429e2e))
+
+
+
+---
+
 ## 5.1.0 (2019-10-14)
 
 ### Features
