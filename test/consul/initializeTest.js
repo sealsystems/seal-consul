@@ -29,6 +29,7 @@ suite('consul.initialize', () => {
       .is.throwingAsync('Consul url is missing.');
   });
 
+  // eslint-disable-next-line mocha/no-skipped-tests
   test('calls consul with the given options.', async () => {
     const context = {};
 
