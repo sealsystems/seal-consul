@@ -15,12 +15,13 @@
           "--timeout",
           "999999",
           "--colors",
+          "--recursive",
           "${workspaceFolder}/test"
         ],
         "internalConsoleOptions": "openOnSessionStart",
-        "env": {
-          "TLS_UNPROTECTED": "world"
-        }
+        "skipFiles": [
+          "<node_internals>/**"
+        ]
       }
     ]
 }
