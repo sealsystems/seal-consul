@@ -12,7 +12,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:12.13.1
-      - image: circleci/mongo:3.2.9
+      - image: mongo:3.6.17
       - image: consul:0.9.3
 
     environment:
