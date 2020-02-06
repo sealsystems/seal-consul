@@ -4,7 +4,7 @@ const assert = require('assertthat');
 const proxyquire = require('proxyquire');
 const uuid = require('uuid/v4');
 
-const consul = require('../../lib/consul');
+const consul = require('../../lib');
 const resolveService = require('../../lib/consul/resolveService');
 
 let resolveResults;

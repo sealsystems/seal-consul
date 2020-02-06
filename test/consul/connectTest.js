@@ -2,11 +2,14 @@
 
 const assert = require('assertthat');
 
-const consul = require('../../lib/consul');
-
-const host = require('docker-host')().host;
+const consul = require('../../lib');
 
 suite('consul.connect', () => {
+  suiteSetup(async () => {
+    // eslint-disable-next-line no-process-env
+    process.env.TLS_UNPROTECTED = 'world';
+  });
+
   setup(async () => {
     consul.retryOptions = {
       retries: 5,
@@ -66,29 +69,20 @@ suite('consul.connect', () => {
     this.timeout(10000);
 
     await consul.connect({
-      consulUrl: `http://${host}:8500`,
+      consulUrl: `http://localhost:8500`,
       serviceName: 'foo',
-      serviceUrl: `http://${host}:3000`
+      serviceUrl: `http://localhost:3000`
     });
 
-    const checkHost = function() {
-      // Special treatment for localhost
-      if (host === 'localhost') {
-        return consul.options.address === '127.0.0.1';
-      }
-
-      return consul.options.address === host;
-    };
-
-    assert.that(checkHost()).is.true();
+    assert.that(consul.options.address).is.equalTo('127.0.0.1');
   });
 
   test('stores given service tags.', async () => {
     await consul.connect({
-      consulUrl: `http://${host}:8500`,
+      consulUrl: `http://localhost:8500`,
       serviceName: 'foo',
       serviceTags: ['tag1', 'tag2'],
-      serviceUrl: `bar://${host}:3000`
+      serviceUrl: `bar://localhost:3000`
     });
 
     assert.that(consul.options.tags.length).is.equalTo(3);
@@ -100,10 +94,10 @@ suite('consul.connect', () => {
 
   test('ignores empty service tags.', async () => {
     await consul.connect({
-      consulUrl: `http://${host}:8500`,
+      consulUrl: `http://localhost:8500`,
       serviceName: 'foo',
       serviceTags: ['tag', ''],
-      serviceUrl: `bar://${host}:3000`
+      serviceUrl: `bar://localhost:3000`
     });
 
     assert.that(consul.options.tags.length).is.equalTo(2);
@@ -116,7 +110,7 @@ suite('consul.connect', () => {
     this.timeout(60 * 1000);
 
     await consul.connect({
-      consulUrl: `http://${host}:8500`,
+      consulUrl: `http://localhost:8500`,
       serviceName: 'foo',
       serviceUrl: 'http://:3000'
     });

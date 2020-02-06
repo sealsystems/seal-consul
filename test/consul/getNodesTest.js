@@ -4,7 +4,7 @@ const assert = require('assertthat');
 const host = require('docker-host')().host;
 const uuid = require('uuid/v4');
 
-const consul = require('../../lib/consul');
+const consul = require('../../lib');
 const getNodes = require('../../lib/consul/getNodes');
 
 suite('consul.getNodes', () => {

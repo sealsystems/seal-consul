@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const consul = require('../../lib/consul');
+const consul = require('../../lib');
 
 const host = require('docker-host')().host;
 

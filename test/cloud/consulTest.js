@@ -15,7 +15,7 @@ suite('cloud.index', () => {
     });
     restore = nodeenv('SERVICE_DISCOVERY', 'cloud');
     // eslint-disable-next-line global-require
-    cloud = require('../../lib/consul');
+    cloud = require('../../lib');
   });
 
   teardown(async () => {
