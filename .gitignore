@@ -2,6 +2,9 @@
 node_modules/
 npm-debug.log
 
+# NPM
+.npmrc
+
 # Coverage
 .nyc_output/
 coverage/
