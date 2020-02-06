@@ -1,3 +1,37 @@
+## 5.1.3 (2020-02-06)
+
+### Chores
+
+
+#### bump [@sealsystems](https://github.com/sealsystems)/error from 2.2.0 to 2.3.0 ([36561b1](https://github.com/sealsystems/node-consul/commit/36561b1))
+
+Bumps @sealsystems/error from 2.2.0 to 2.3.0.
+
+Signed-off-by: dependabot-preview[bot] <support@dependabot.com>
+#### bump async-retry from 1.2.3 to 1.3.1 ([a5ddf85](https://github.com/sealsystems/node-consul/commit/a5ddf85))
+
+Bumps async-retry from 1.2.3 to 1.3.1.
+
+Signed-off-by: dependabot-preview[bot] <support@dependabot.com>
+#### bump consul from 0.36.0 to 0.37.0 ([0411009](https://github.com/sealsystems/node-consul/commit/0411009))
+
+Bumps consul from 0.36.0 to 0.37.0.
+
+Signed-off-by: dependabot-preview[bot] <support@dependabot.com>
+#### bump eventemitter2 from 5.0.1 to 6.0.0 ([0ce4e50](https://github.com/sealsystems/node-consul/commit/0ce4e50))
+
+Bumps eventemitter2 from 5.0.1 to 6.0.0.
+
+Signed-off-by: dependabot-preview[bot] <support@dependabot.com>
+#### bump parse-duration from 0.1.1 to 0.1.2 ([b4ed462](https://github.com/sealsystems/node-consul/commit/b4ed462))
+
+Bumps parse-duration from 0.1.1 to 0.1.2.
+
+Signed-off-by: dependabot-preview[bot] <support@dependabot.com>
+
+
+---
+
 ## 5.1.2 (2019-10-17)
 
 ### Chores
