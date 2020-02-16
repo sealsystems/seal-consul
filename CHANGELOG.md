@@ -1,3 +1,14 @@
+## 5.1.4 (2020-02-16)
+
+### Chores
+
+
+#### bump app-root-path from 2.2.1 to 3.0.0 ([d02d08e](https://github.com/sealsystems/node-consul/commit/d02d08e))
+
+
+
+---
+
 ## 5.1.3 (2020-02-06)
 
 ### Chores
