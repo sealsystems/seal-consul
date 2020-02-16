@@ -1,3 +1,17 @@
+## 5.1.5 (2020-02-16)
+
+### Chores
+
+
+#### bump getenv from 0.7.0 to 1.0.0 ([ae1d0be](https://github.com/sealsystems/node-consul/commit/ae1d0be))
+
+Bumps getenv from 0.7.0 to 1.0.0.
+
+Signed-off-by: dependabot-preview[bot] <support@dependabot.com>
+
+
+---
+
 ## 5.1.4 (2020-02-16)
 
 ### Chores
