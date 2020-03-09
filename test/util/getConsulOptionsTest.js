@@ -14,7 +14,7 @@ const getConsulOptions = proxyquire('../../lib/util/getConsulOptions', {
 });
 
 suite('util.getConsulOptions', () => {
-  setup(() => {
+  setup(async () => {
     keystore = null;
   });
 
