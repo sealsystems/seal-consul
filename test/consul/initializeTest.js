@@ -13,7 +13,7 @@ const initialize = proxyquire('../../lib/consul/initialize', {
 });
 
 suite('consul.initialize', () => {
-  setup(() => {
+  setup(async () => {
     consulOptions = null;
   });
 
