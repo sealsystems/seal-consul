@@ -1,3 +1,16 @@
+## 5.1.6 (2020-03-09)
+
+### Chores
+
+
+#### yoed ([2469dc3](https://github.com/sealsystems/node-consul/commit/2469dc3))
+
+#### bump [@sealsystems](https://github.com/sealsystems)/error from 2.3.0 to 2.3.1 ([#43](https://github.com/sealsystems/node-consul/issues/43)) ([b96112e](https://github.com/sealsystems/node-consul/commit/b96112e))
+
+
+
+---
+
 ## 5.1.5 (2020-02-16)
 
 ### Chores
