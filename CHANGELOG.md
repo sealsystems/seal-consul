@@ -1,3 +1,16 @@
+## 5.1.7 (2020-06-29)
+
+### Chores
+
+
+bump [@sealsystems](https://github.com/sealsystems)/droddel from 2.2.0 to 2.2.1 ([#45](https://github.com/sealsystems/node-consul/issues/45)) ([5bb3da3](https://github.com/sealsystems/node-consul/commit/5bb3da3))
+
+bump [@sealsystems](https://github.com/sealsystems)/tlscert from 2.3.0 to 2.3.1 ([#44](https://github.com/sealsystems/node-consul/issues/44)) ([ccd30ba](https://github.com/sealsystems/node-consul/commit/ccd30ba))
+
+bump [@sealsystems](https://github.com/sealsystems)/tlscert from 2.3.1 to 2.3.7 ([#48](https://github.com/sealsystems/node-consul/issues/48)) ([3fadbb1](https://github.com/sealsystems/node-consul/commit/3fadbb1))
+
+Fixed getHostname for new consul version ([46dcc84](https://github.com/sealsystems/node-consul/commit/46dcc84))
+
 ## 5.1.6 (2020-03-09)
 
 ### Chores
