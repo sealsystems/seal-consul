@@ -30,7 +30,7 @@ suite('consul.initialize', () => {
   });
 
   // eslint-disable-next-line mocha/no-skipped-tests
-  test('calls consul with the given options.', async () => {
+  test.skip('calls consul with the given options.', async () => {
     const context = {};
 
     await initialize.call(context, { consulUrl: 'http://foo:1234' });
