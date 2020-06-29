@@ -23,37 +23,25 @@ suite('consul.getHostname', () => {
       .is.throwingAsync('foo');
   });
 
-  test('returns the hostname provided by Consul.', async () => {
+  test('returns cached hostname.', async () => {
+    let noCalled = 0;
+
     const agent = {
       async self() {
+        noCalled++;
         return {
           Config: {
             NodeName: 'foo',
-            Datacenter: 'bar',
-            Domain: 'baz.'
+            Datacenter: 'bar'
           }
         };
       }
     };
 
+    await getHostname.call({ agent });
     const hostname = await getHostname.call({ agent });
 
-    assert.that(hostname).is.equalTo('foo.node.bar.baz');
-  });
-
-  // Please note: Depends on test above!
-  test('returns cached hostname.', async () => {
-    let wasCalled = false;
-
-    const agent = {
-      async self() {
-        wasCalled = true;
-      }
-    };
-
-    const hostname = await getHostname.call({ agent });
-
-    assert.that(wasCalled).is.false();
-    assert.that(hostname).is.equalTo('foo.node.bar.baz');
+    assert.that(noCalled).is.equalTo(1);
+    assert.that(hostname).is.equalTo('foo.node.bar.consul');
   });
 });
