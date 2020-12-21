@@ -1,3 +1,10 @@
+## 5.1.9 (2020-12-21)
+
+### Chores
+
+
+Trigger release ([46c4bab](https://github.com/sealsystems/node-consul/commit/46c4bab))
+
 ## 5.1.8 (2020-12-21)
 
 ### Chores
