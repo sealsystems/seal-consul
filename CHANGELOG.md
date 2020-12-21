@@ -1,3 +1,12 @@
+## 5.1.8 (2020-12-21)
+
+### Chores
+
+
+bump [@sealsystems](https://github.com/sealsystems)/tlscert from 2.3.7 to 2.3.8 ([#81](https://github.com/sealsystems/node-consul/issues/81)) ([767e141](https://github.com/sealsystems/node-consul/commit/767e141))
+
+bump [@sealsystems](https://github.com/sealsystems)/tlscert from 2.3.8 to 2.3.9 ([#105](https://github.com/sealsystems/node-consul/issues/105)) ([b1ae483](https://github.com/sealsystems/node-consul/commit/b1ae483))
+
 ## 5.1.7 (2020-06-29)
 
 ### Chores
