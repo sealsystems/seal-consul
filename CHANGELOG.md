@@ -1,3 +1,12 @@
+## 5.1.10 (2020-12-26)
+
+### Chores
+
+
+Update build configuration ([8a2606a](https://github.com/sealsystems/node-consul/commit/8a2606a))
+
+Update build configuration ([adb2576](https://github.com/sealsystems/node-consul/commit/adb2576))
+
 ## 5.1.9 (2020-12-21)
 
 ### Chores
