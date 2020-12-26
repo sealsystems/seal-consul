@@ -45,7 +45,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sealsystems/consul"
+    "url": "https://github.com/sealsystems/node-consul"
   },
   "release": {
     "extends": "@sealsystems/semantic-release/node-module"
