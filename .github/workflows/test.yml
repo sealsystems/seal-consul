@@ -28,6 +28,9 @@ jobs:
     services:
       mongo:
         image: ghcr.io/sealsystems/mongodb-rs:3.6.17
+        credentials:
+          username: ${{ github.actor }}
+          password: ${{ secrets.CI_TOKEN }}
         ports:
         - 27017:27017
       consul:
