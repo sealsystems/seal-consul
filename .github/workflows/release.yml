@@ -12,14 +12,11 @@ env:
 
 jobs:
   Test-Linux:
-    # Ignore release commits
-    if: "!startsWith(github.event.head_commit.message, 'Release')"
-
     runs-on: ubuntu-18.04
 
     services:
       mongo:
-        image: plossys/mongodb-rs:3.6.17
+        image: ghcr.io/sealsystems/mongodb-rs:3.6.17
         ports:
         - 27017:27017
       consul:
@@ -59,9 +56,6 @@ jobs:
         NODE_AUTH_TOKEN: ${{secrets.CI_TOKEN}}
 
   # Test-Windows:
-  #   # Ignore release commits
-  #   if: "!startsWith(github.event.head_commit.message, 'Release')"
-
   #   runs-on: windows-2019
 
   #   steps:
@@ -150,9 +144,6 @@ jobs:
   #       NODE_AUTH_TOKEN: ${{secrets.CI_TOKEN}}
 
   Release:
-    # Ignore release commits
-    if: "!startsWith(github.event.head_commit.message, 'Release')"
-
     needs:
     - Test-Linux
     # - Test-Windows
@@ -171,9 +162,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        # Use personal access token for cloning (and later pushing) code
-        token: ${{ secrets.CI_TOKEN }}
 
     - name: Use Node.js 12.19.0
       uses: actions/setup-node@v1
