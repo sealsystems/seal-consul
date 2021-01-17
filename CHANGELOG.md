@@ -1,3 +1,10 @@
+## 5.1.11 (2021-01-17)
+
+### Chores
+
+
+bump [@sealsystems](https://github.com/sealsystems)/droddel from 2.2.1 to 2.2.4 ([#114](https://github.com/sealsystems/node-consul/issues/114)) ([1327171](https://github.com/sealsystems/node-consul/commit/1327171))
+
 ## 5.1.10 (2020-12-26)
 
 ### Chores
