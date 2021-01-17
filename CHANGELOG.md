@@ -1,3 +1,10 @@
+## 5.1.12 (2021-01-17)
+
+### Chores
+
+
+bump [@sealsystems](https://github.com/sealsystems)/error from 2.3.1 to 2.3.5 ([#117](https://github.com/sealsystems/node-consul/issues/117)) ([4ae500c](https://github.com/sealsystems/node-consul/commit/4ae500c))
+
 ## 5.1.11 (2021-01-17)
 
 ### Chores
