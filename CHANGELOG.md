@@ -1,3 +1,12 @@
+## 5.1.13 (2021-01-17)
+
+### Chores
+
+
+bump [@sealsystems](https://github.com/sealsystems)/tlscert from 2.3.15 to 2.3.16 ([#119](https://github.com/sealsystems/node-consul/issues/119)) ([c687b65](https://github.com/sealsystems/node-consul/commit/c687b65))
+
+bump [@sealsystems](https://github.com/sealsystems)/tlscert from 2.3.9 to 2.3.15 ([#118](https://github.com/sealsystems/node-consul/issues/118)) ([4bde99d](https://github.com/sealsystems/node-consul/commit/4bde99d))
+
 ## 5.1.12 (2021-01-17)
 
 ### Chores
