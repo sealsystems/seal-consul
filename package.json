@@ -34,9 +34,9 @@
     "parse-duration": "0.4.4"
   },
   "devDependencies": {
-    "@sealsystems/eslint-config-es": "3.6.5",
-    "@sealsystems/mocha": "4.1.7",
-    "@sealsystems/semantic-release": "4.3.2",
+    "@sealsystems/eslint-config-es": "3.6.7",
+    "@sealsystems/mocha": "4.1.9",
+    "@sealsystems/semantic-release": "4.3.4",
     "docker-host": "3.1.0",
     "mockery": "2.1.0",
     "nodeenv": "1.0.0",
