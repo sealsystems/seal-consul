@@ -1,3 +1,12 @@
+## 5.1.17 (2021-06-09)
+
+### Chores
+
+
+removed package-lock.json and created new one ([4193b91](https://github.com/sealsystems/node-consul/commit/4193b91))
+
+bump [@sealsystems](https://github.com/sealsystems)/tlscert from 2.3.19 to 2.3.20 ([#157](https://github.com/sealsystems/node-consul/issues/157)) ([9e33f58](https://github.com/sealsystems/node-consul/commit/9e33f58))
+
 ## 5.1.16 (2021-03-26)
 
 ### Chores
