@@ -1,3 +1,12 @@
+## 5.1.18 (2021-06-22)
+
+### Chores
+
+
+[security] bump lodash from 4.17.15 to 4.17.21 ([fae8928](https://github.com/sealsystems/node-consul/commit/fae8928))
+
+bump eventemitter2 from 6.4.3 to 6.4.4 ([3779b18](https://github.com/sealsystems/node-consul/commit/3779b18))
+
 ## 5.1.17 (2021-06-09)
 
 ### Chores
