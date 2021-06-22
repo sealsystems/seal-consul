@@ -1,3 +1,10 @@
+## 5.1.19 (2021-06-22)
+
+### Chores
+
+
+bump normalize-url from 6.0.0 to 6.0.1 ([8a0f74f](https://github.com/sealsystems/node-consul/commit/8a0f74f))
+
 ## 5.1.18 (2021-06-22)
 
 ### Chores
